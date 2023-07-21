@@ -71,6 +71,41 @@ func (h registerHdl) UpdateRegister(c *gin.Context) {
 		"message": "Update register success!!",
 	})
 }
+func (h registerHdl) UpdateRole(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("registerID"))
+	if err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
+	}
+
+	req := domain.RoleId{}
+	err = c.BindJSON(&req)
+	err = h.svc.UpdateRole(id, req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Update register success!!",
+	})
+}
+func (h registerHdl) UpdateStatus(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("registerID"))
+	if err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
+	}
+
+	req := domain.RecordStatus{}
+	err = c.BindJSON(&req)
+	err = h.svc.UpdateStetus(id ,req)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Update register success!!",
+	})
+}
+
 
 func (h registerHdl) DeleteRegister(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("registerID"))

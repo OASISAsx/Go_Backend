@@ -86,6 +86,7 @@ func (s areaapSvc) UpdateAreaap(id int, req domain.AreaapRequest) error {
 	}
 	return nil
 }
+
 func (s areaapSvc) DeleteAreaap(id int) error {
 	err := s.repo.Delete(id)
 	if err != nil {

@@ -28,7 +28,8 @@ func (s reviewSvc) GetAllReview() ([]domain.ReviewRespone, error) {
 		resp = append(resp, domain.ReviewRespone{
 			RvId:        c.RvId,
 			UserId:      c.UserId,
-			BuyerId:     c.BuyerId,
+			ProductId:   c.ProductId,
+			RvImg:       c.RvImg,
 			RvRank:      c.RvRank,
 			RvComment:   c.RvComment,
 			CreatedBy:   c.CreatedBy,
@@ -49,7 +50,8 @@ func (s reviewSvc) GetReview(id int) (*domain.ReviewRespone, error) {
 	resp := domain.ReviewRespone{
 		RvId:        cust.RvId,
 		UserId:      cust.UserId,
-		BuyerId:     cust.BuyerId,
+		ProductId:   cust.ProductId,
+		RvImg:       cust.RvImg,
 		RvRank:      cust.RvRank,
 		RvComment:   cust.RvComment,
 		CreatedBy:   cust.CreatedBy,
@@ -63,7 +65,8 @@ func (s reviewSvc) AddReview(req domain.ReviewRequest) (*domain.ReviewRespone, e
 	newtime := time.Now()
 	cust := port.Review{
 		UserId:      req.UserId,
-		BuyerId:     req.BuyerId,
+		ProductId:   req.ProductId,
+		RvImg:       req.RvImg,
 		RvRank:      req.RvRank,
 		RvComment:   req.RvComment,
 		CreatedBy:   req.CreatedBy,
@@ -75,7 +78,8 @@ func (s reviewSvc) AddReview(req domain.ReviewRequest) (*domain.ReviewRespone, e
 	}
 	resp := domain.ReviewRespone{
 		UserId:      newCust.UserId,
-		BuyerId:     newCust.BuyerId,
+		ProductId:   newCust.ProductId,
+		RvImg:       newCust.RvImg,
 		RvRank:      newCust.RvRank,
 		RvComment:   newCust.RvComment,
 		CreatedBy:   newCust.CreatedBy,
@@ -88,7 +92,8 @@ func (s reviewSvc) UpdateReview(id int, req domain.ReviewRequest) error {
 	newtime := time.Now()
 	cust := port.Review{
 		UserId:      req.UserId,
-		BuyerId:     req.BuyerId,
+		ProductId:   req.ProductId,
+		RvImg:       req.RvImg,
 		RvRank:      req.RvRank,
 		RvComment:   req.RvComment,
 		UpdatedBy:   req.UpdatedBy,

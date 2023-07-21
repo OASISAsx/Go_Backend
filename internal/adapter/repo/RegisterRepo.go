@@ -55,6 +55,20 @@ func (c registerRepo) Update(id int, register port.Register) error {
 	}
 	return nil
 }
+func (c registerRepo) UpdateRole(id int, role string) error {
+	err := c.db.Model(&port.Register{}).Where("user_id = ?", id).Update("role_id", role).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (c registerRepo) UpdateStatus(id int, Status bool) error {
+	err := c.db.Model(&port.Register{}).Where("user_id = ?", id).Update("record_status", Status).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 func (c registerRepo) Delete(id int) error {
 	err := c.db.Delete(&port.Register{}, id).Error

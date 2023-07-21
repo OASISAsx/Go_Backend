@@ -10,9 +10,12 @@ type ProductRepo interface {
 
 type Product struct {
 	ProductId     uint `gorm:"primaryKey;autoIncrement;type:int(10)"`
-	SvcId         string
+	SvcId         uint
 	ProductName   string
 	ProductDesc   string
+	Producttype   string
+	ProductPrice  uint
+	ProductStock uint
 	ProductImages string
 	CreatedBy     string
 	CreatedDate   string

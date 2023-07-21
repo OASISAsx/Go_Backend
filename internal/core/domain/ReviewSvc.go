@@ -10,7 +10,9 @@ type ReviewSvc interface {
 
 type ReviewRequest struct {
 	UserId      uint   `json:"userid"`
-	BuyerId     uint   `json:"buyerid"`
+	ProductId   uint   `json:"productid"`
+	RvId        uint   `json:"rvid"`
+	RvImg       string `json:"rvimg"`
 	RvRank      string `json:"rvrank"`
 	RvComment   string `json:"rvcomment"`
 	CreatedBy   string `json:"createdby"`
@@ -22,7 +24,8 @@ type ReviewRequest struct {
 type ReviewRespone struct {
 	RvId        uint   `json:"rvid"`
 	UserId      uint   `json:"userid"`
-	BuyerId     uint   `json:"buyerid"`
+	ProductId   uint   `json:"productid"`
+	RvImg       string `json:"rvimg"`
 	RvRank      string `json:"rvrank"`
 	RvComment   string `json:"rvcomment"`
 	CreatedBy   string `json:"createdby"`

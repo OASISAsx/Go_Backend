@@ -7,16 +7,27 @@ type RegisterSvc interface {
 	GetRegister(int) (*RegisterResp, error)
 	AddRegister(RegisterReq) (*RegisterResp, error)
 	UpdateRegister(int, RegisterReq) error
+	UpdateRole(int, RoleId) error
+	UpdateStetus(int, RecordStatus) error
 	DeleteRegister(int) error
 }
+type RecordStatus struct {
+	RecordStatus bool `json:"recordStatus" `
+	UpdatedDate  string `json:"updateddate" `
+}
 
+type RoleId struct {
+	RoleId      string `json:"roleId" `
+	UpdatedDate string `json:"updateddate" `
+}
 type RegisterReq struct {
-	RoleId       int    `json:"roleId" binding:"required"`
+	RoleId       string `json:"roleId" binding:"required"`
 	Username     string `json:"username" binding:"required"`
 	Password     string `json:"password" binding:"required"`
 	Nickname     string `json:"nickname" binding:"required"`
 	Email        string `json:"email" binding:"required"`
-	RecordStatus string `json:"recordstatus" binding:"required"`
+	Avatar       string `json:"Avatar" `
+	RecordStatus bool `json:"recordstatus" binding:"required"`
 	CreatedBy    string `json:"createdby" binding:"required"`
 	CreatedDate  string `json:"createddate" binding:"required"`
 	UpdatedBy    string `json:"updatedby" binding:"required"`
@@ -25,12 +36,13 @@ type RegisterReq struct {
 
 type RegisterResp struct {
 	UserId       uint   `json:"userid" binding:"required"`
-	RoleId       int    `json:"roleId" binding:"required"`
+	RoleId       string `json:"roleId" binding:"required"`
 	Username     string `json:"username" binding:"required"`
 	Password     string `json:"password" binding:"required"`
 	Nickname     string `json:"nickname" binding:"required"`
 	Email        string `json:"email" binding:"required"`
-	RecordStatus string `json:"recordstatus" binding:"required"`
+	Avatar       string `json:"Avatar" `
+	RecordStatus bool `json:"recordstatus" binding:"required"`
 	CreatedBy    string `json:"createdby" binding:"required"`
 	CreatedDate  string `json:"createddate" binding:"required"`
 	UpdatedBy    string `json:"updatedby" binding:"required"`

@@ -8,32 +8,30 @@ import (
 	"time"
 )
 
-type productSvc struct {
-	repo port.ProductRepo
+type cartSvc struct {
+	repo port.CartRepo
 }
 
-func NewProductSvc(repo port.ProductRepo) domain.ProductSvc {
-	return productSvc{
+func NewCartSvc(repo port.CartRepo) domain.CartSvc {
+	return cartSvc{
 		repo: repo,
 	}
 }
 
-func (s productSvc) GetAllProduct() ([]domain.ProductRespone, error) {
+func (s cartSvc) GetAllCart() ([]domain.CartRespone, error) {
 	custs, err := s.repo.GetAll()
 	if err != nil {
-		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot get product form DB")
+		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot get Cart form DB")
 	}
-	resp := []domain.ProductRespone{}
+	resp := []domain.CartRespone{}
 	for _, c := range custs {
-		resp = append(resp, domain.ProductRespone{
-			ProductId:     c.ProductId,
+		resp = append(resp, domain.CartRespone{
+			CartId:     c.CartId,
 			SvcId:         c.SvcId,
 			ProductName:   c.ProductName,
 			ProductDesc:   c.ProductDesc,
-			ProductPrice:  c.ProductPrice,
-			ProductStock: c.ProductStock,
 			ProductImages: c.ProductImages,
-			Producttype:   c.Producttype,
+			Producttype: c.Producttype,
 			CreatedBy:     c.CreatedBy,
 			CreatedDate:   c.CreatedDate,
 			UpdatedBy:     c.UpdatedBy,
@@ -44,17 +42,15 @@ func (s productSvc) GetAllProduct() ([]domain.ProductRespone, error) {
 	return resp, nil
 }
 
-func (s productSvc) GetById(id int) (*domain.ProductRespone, error) {
+func (s cartSvc) GetById(id int) (*domain.CartRespone, error) {
 	cust, err := s.repo.GetById(id)
 	if err != nil {
-		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot get product form DB")
+		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot get Cart form DB")
 	}
-	resp := domain.ProductRespone{
-		ProductId:     cust.ProductId,
+	resp := domain.CartRespone{
+		CartId:     cust.CartId,
 		SvcId:         cust.SvcId,
 		ProductName:   cust.ProductName,
-		ProductPrice:  cust.ProductPrice,
-		ProductStock: cust.ProductStock,
 		ProductDesc:   cust.ProductDesc,
 		ProductImages: cust.ProductImages,
 		Producttype:   cust.Producttype,
@@ -65,29 +61,25 @@ func (s productSvc) GetById(id int) (*domain.ProductRespone, error) {
 	}
 	return &resp, nil
 }
-func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespone, error) {
+func (s cartSvc) AddCart(req domain.CartRequest) (*domain.CartRespone, error) {
 	newtime := time.Now()
-	cust := port.Product{
+	cust := port.Cart{
 		SvcId:         req.SvcId,
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
-		ProductPrice:  req.ProductPrice,
-		ProductStock: req.ProductStock,
 		ProductImages: req.ProductImages,
-		Producttype:   req.Producttype,
+		Producttype:  req.Producttype,
 		CreatedBy:     req.CreatedBy,
 		CreatedDate:   newtime.Format(time.DateTime),
 	}
 	newCust, err := s.repo.Create(cust)
 	if err != nil {
-		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot save product")
+		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot save Cart")
 	}
-	resp := domain.ProductRespone{
+	resp := domain.CartRespone{
 		SvcId:         newCust.SvcId,
 		ProductName:   newCust.ProductName,
 		ProductDesc:   newCust.ProductDesc,
-		ProductPrice:  newCust.ProductPrice,
-		ProductStock: newCust.ProductStock,
 		ProductImages: newCust.ProductImages,
 		Producttype:   newCust.Producttype,
 		CreatedBy:     newCust.CreatedBy,
@@ -96,14 +88,12 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 
 	return &resp, nil
 }
-func (s productSvc) UpdateProduct(id int, req domain.ProductRequest) error {
+func (s cartSvc) UpdateCart(id int, req domain.CartRequest) error {
 	newtime := time.Now()
-	cust := port.Product{
+	cust := port.Cart{
 		SvcId:         req.SvcId,
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
-		ProductPrice:  req.ProductPrice,
-		ProductStock: req.ProductStock,
 		ProductImages: req.ProductImages,
 		Producttype:   req.Producttype,
 		UpdatedBy:     req.UpdatedBy,
@@ -111,14 +101,14 @@ func (s productSvc) UpdateProduct(id int, req domain.ProductRequest) error {
 	}
 	err := s.repo.Update(id, cust)
 	if err != nil {
-		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update product")
+		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update Cart")
 	}
 	return nil
 }
-func (s productSvc) DeleteProduct(id int) error {
+func (s cartSvc) DeleteCart(id int) error {
 	err := s.repo.Delete(id)
 	if err != nil {
-		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot delete product")
+		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot delete Cart")
 	}
 	return nil
 }

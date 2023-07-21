@@ -170,9 +170,34 @@ func bindRegister(g gin.Engine) {
 		v1.GET("/register/:registerID", hdl.GetRegister)
 		v1.POST("/register", hdl.AddRegister)
 		v1.PUT("/register/:registerID", hdl.UpdateRegister)
+		v1.PUT("/user/role/:registerID", hdl.UpdateRole)
+		v1.PUT("/user/status/:registerID", hdl.UpdateStatus)
 		v1.DELETE("/register/:registerID", hdl.DeleteRegister)
 		v1.POST("/login",hdl.Login)
 		v1.GET("/user",middleware.DeserializeUser(repo),hdl.GetRegisters)
 		v1.GET("/profile",middleware.DeserializeUser(repo),hdl.GetProfile)
+
+	}
+}
+
+func bindImage(g gin.Engine) {
+	v1 := g.Group("/v1")
+	{
+		v1.POST("/image", handler.FileUpload())
+		v1.POST("/remote", handler.RemoteUpload())
+	}
+}
+func bindCart(g gin.Engine) {
+	repo := repo.NewCartRepo(infrastructure.DB)
+	svc := service.NewCartSvc(repo)
+	hdl := handler.NewCartHdl(svc)
+
+	v1 := g.Group("/v1")
+	{
+		v1.GET("/carts", hdl.GetCarts)
+		v1.GET("/cart/:cartID", hdl.GetCart)
+		v1.POST("/cart", hdl.AddCart)
+		v1.PUT("/cart/:cartID", hdl.UpdateCart)
+		v1.DELETE("/cart/:cartID", hdl.DeleteCart)
 	}
 }

@@ -36,7 +36,7 @@ func InitDB() {
 
 	DB = db
 	db.AutoMigrate(&port.Role{}, &port.Review{}, &port.Product{}, &port.Buycs{}, &port.BuyDetail{}, &port.Areapv{},
-		&port.UserDetail{}, &port.Areaap{}, &port.Areadt{}, &port.Register{})
+		&port.UserDetail{}, &port.Areaap{}, &port.Areadt{}, &port.Register{} ,&port.Cart{}  ) 
 
 }
 

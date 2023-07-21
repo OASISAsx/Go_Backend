@@ -25,6 +25,8 @@ func Run() {
 	bindAreaap(a.GinEngine())
 	bindAreadt(a.GinEngine())
 	bindRegister(a.GinEngine())
+	bindImage(a.GinEngine())
+	bindCart(a.GinEngine())
 
 	port := fmt.Sprintf(":%v", viper.GetInt("app.port"))
 	a.Start(port)

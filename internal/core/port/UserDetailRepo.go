@@ -9,7 +9,8 @@ type UserDetailRepo interface {
 }
 
 type UserDetail struct {
-	UserdtId        string `gorm:"primaryKey;autoIncrement;type:int(10)"`
+	UserdtId        uint `gorm:"primaryKey;autoIncrement;type:int(10)"`
+	UserId          uint
 	CardId          string
 	SvcId           string
 	FristNameUser   string
@@ -25,7 +26,6 @@ type UserDetail struct {
 	UserEmail       string
 	UserImege       string
 	RecordStatus    string
-	UserId          string
 	CreatedBy       string
 	CreatedDate     string
 	UpdatedBy       string `gorm:"null"`
