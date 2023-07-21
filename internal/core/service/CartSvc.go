@@ -26,12 +26,13 @@ func (s cartSvc) GetAllCart() ([]domain.CartRespone, error) {
 	resp := []domain.CartRespone{}
 	for _, c := range custs {
 		resp = append(resp, domain.CartRespone{
-			CartId:     c.CartId,
-			SvcId:         c.SvcId,
+			CartId:        c.CartId,
+			UserId:        c.UserId,
+			ProductId:     c.ProductId,
 			ProductName:   c.ProductName,
-			ProductDesc:   c.ProductDesc,
 			ProductImages: c.ProductImages,
-			Producttype: c.Producttype,
+			ProductType:   c.ProductType,
+			ProductPice:   c.ProductPrice,
 			CreatedBy:     c.CreatedBy,
 			CreatedDate:   c.CreatedDate,
 			UpdatedBy:     c.UpdatedBy,
@@ -42,33 +43,42 @@ func (s cartSvc) GetAllCart() ([]domain.CartRespone, error) {
 	return resp, nil
 }
 
-func (s cartSvc) GetById(id int) (*domain.CartRespone, error) {
-	cust, err := s.repo.GetById(id)
+func (s cartSvc) GetById(id int) ([]domain.CartRespone, error) {
+	custs, err := s.repo.GetById(id)
 	if err != nil {
 		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot get Cart form DB")
 	}
-	resp := domain.CartRespone{
-		CartId:     cust.CartId,
-		SvcId:         cust.SvcId,
-		ProductName:   cust.ProductName,
-		ProductDesc:   cust.ProductDesc,
-		ProductImages: cust.ProductImages,
-		Producttype:   cust.Producttype,
-		CreatedBy:     cust.CreatedBy,
-		CreatedDate:   cust.CreatedDate,
-		UpdatedBy:     cust.UpdatedBy,
-		UpdatedDate:   cust.UpdatedDate,
+	resp := []domain.CartRespone{}
+	for _, c := range custs {
+		resp = append(resp, domain.CartRespone{
+			CartId:        c.CartId,
+			UserId:        c.UserId,
+			ProductId:     c.ProductId,
+			ProductName:   c.ProductName,
+			ProductImages: c.ProductImages,
+			ProductType:   c.ProductType,
+			ProductPice:   c.ProductPrice,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
+		})
+
 	}
-	return &resp, nil
+	return resp, nil
 }
 func (s cartSvc) AddCart(req domain.CartRequest) (*domain.CartRespone, error) {
 	newtime := time.Now()
 	cust := port.Cart{
 		SvcId:         req.SvcId,
+		UserId:        req.UserId,
+		ProductId:     req.ProductId,
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
 		ProductImages: req.ProductImages,
-		Producttype:  req.Producttype,
+		ProductType:   req.ProductType,
+		ProductPrice:  req.ProductPice,
+		ProductStock:  req.ProductStock,
 		CreatedBy:     req.CreatedBy,
 		CreatedDate:   newtime.Format(time.DateTime),
 	}
@@ -78,10 +88,13 @@ func (s cartSvc) AddCart(req domain.CartRequest) (*domain.CartRespone, error) {
 	}
 	resp := domain.CartRespone{
 		SvcId:         newCust.SvcId,
+		UserId:        newCust.UserId,
+		ProductId:     newCust.ProductId,
 		ProductName:   newCust.ProductName,
-		ProductDesc:   newCust.ProductDesc,
 		ProductImages: newCust.ProductImages,
-		Producttype:   newCust.Producttype,
+		ProductPice:   newCust.ProductPrice,
+		ProductType:   newCust.ProductType,
+		ProductStock:  newCust.ProductStock,
 		CreatedBy:     newCust.CreatedBy,
 		CreatedDate:   newtime.Format(time.DateTime),
 	}
@@ -91,11 +104,15 @@ func (s cartSvc) AddCart(req domain.CartRequest) (*domain.CartRespone, error) {
 func (s cartSvc) UpdateCart(id int, req domain.CartRequest) error {
 	newtime := time.Now()
 	cust := port.Cart{
-		SvcId:         req.SvcId,
+
+		UserId:        req.UserId,
+		ProductId:     req.ProductId,
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
 		ProductImages: req.ProductImages,
-		Producttype:   req.Producttype,
+		ProductType:   req.ProductType,
+		ProductPrice:  req.ProductPice,
+		ProductStock:  req.ProductStock,
 		UpdatedBy:     req.UpdatedBy,
 		UpdatedDate:   newtime.Format(time.DateTime),
 	}

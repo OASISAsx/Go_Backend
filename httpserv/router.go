@@ -67,6 +67,10 @@ func bindProduct(g gin.Engine) {
 		v1.POST("/product", hdl.AddProduct)
 		v1.PUT("/product/:productID", hdl.UpdateProduct)
 		v1.DELETE("/product/:productID", hdl.DeleteProduct)
+		v1.PUT("/product/count/:ProductId", hdl.UpdateCount)
+		v1.PUT("/product/status/:ProductId", hdl.UpdateStatusProduct)
+		v1.PUT("/product/status/sell/:ProductId", hdl.UpdateSellStatus)
+		v1.GET("/search/:ProductName", hdl.Search)
 	}
 
 }
@@ -173,9 +177,9 @@ func bindRegister(g gin.Engine) {
 		v1.PUT("/user/role/:registerID", hdl.UpdateRole)
 		v1.PUT("/user/status/:registerID", hdl.UpdateStatus)
 		v1.DELETE("/register/:registerID", hdl.DeleteRegister)
-		v1.POST("/login",hdl.Login)
-		v1.GET("/user",middleware.DeserializeUser(repo),hdl.GetRegisters)
-		v1.GET("/profile",middleware.DeserializeUser(repo),hdl.GetProfile)
+		v1.POST("/login", hdl.Login)
+		v1.GET("/user", middleware.DeserializeUser(repo), hdl.GetRegisters)
+		v1.GET("/profile", middleware.DeserializeUser(repo), hdl.GetProfile)
 
 	}
 }
@@ -195,9 +199,17 @@ func bindCart(g gin.Engine) {
 	v1 := g.Group("/v1")
 	{
 		v1.GET("/carts", hdl.GetCarts)
-		v1.GET("/cart/:cartID", hdl.GetCart)
+		v1.GET("/cart/:CartID", hdl.GetCart)
 		v1.POST("/cart", hdl.AddCart)
-		v1.PUT("/cart/:cartID", hdl.UpdateCart)
-		v1.DELETE("/cart/:cartID", hdl.DeleteCart)
+		v1.PUT("/cart/:CartID", hdl.UpdateCart)
+		v1.DELETE("/cart/:CartID", hdl.DeleteCart)
+	}
+}
+func bindEmail(g gin.Engine) {
+	svc := service.NewSenderSvc()
+	hdl := handler.NewSenderHdl(svc)
+	v1 := g.Group("/v1")
+	{
+		v1.POST("/sender", hdl.SendMail())
 	}
 }

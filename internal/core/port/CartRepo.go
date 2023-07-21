@@ -2,7 +2,7 @@ package port
 
 type CartRepo interface {
 	GetAll() ([]Cart, error)
-	GetById(int) (*Cart, error)
+	GetById(int) ([]Cart, error)
 	Create(Cart) (*Cart, error)
 	Update(int, Cart) error
 	Delete(int) error
@@ -11,10 +11,14 @@ type CartRepo interface {
 type Cart struct {
 	CartId        uint `gorm:"primaryKey;autoIncrement;type:int(10)"`
 	SvcId         uint
+	UserId        uint
+	ProductId     uint
 	ProductName   string
 	ProductDesc   string
-	Producttype   string
+	ProductType   string
 	ProductImages string
+	ProductPrice  string
+	ProductStock  string
 	CreatedBy     string
 	CreatedDate   string
 	UpdatedBy     string `gorm:"null"`

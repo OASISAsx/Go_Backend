@@ -31,7 +31,7 @@ func (s productSvc) GetAllProduct() ([]domain.ProductRespone, error) {
 			ProductName:   c.ProductName,
 			ProductDesc:   c.ProductDesc,
 			ProductPrice:  c.ProductPrice,
-			ProductStock: c.ProductStock,
+			ProductStock:  c.ProductStock,
 			ProductImages: c.ProductImages,
 			Producttype:   c.Producttype,
 			CreatedBy:     c.CreatedBy,
@@ -54,7 +54,7 @@ func (s productSvc) GetById(id int) (*domain.ProductRespone, error) {
 		SvcId:         cust.SvcId,
 		ProductName:   cust.ProductName,
 		ProductPrice:  cust.ProductPrice,
-		ProductStock: cust.ProductStock,
+		ProductStock:  cust.ProductStock,
 		ProductDesc:   cust.ProductDesc,
 		ProductImages: cust.ProductImages,
 		Producttype:   cust.Producttype,
@@ -72,7 +72,7 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
 		ProductPrice:  req.ProductPrice,
-		ProductStock: req.ProductStock,
+		ProductStock:  req.ProductStock,
 		ProductImages: req.ProductImages,
 		Producttype:   req.Producttype,
 		CreatedBy:     req.CreatedBy,
@@ -87,7 +87,7 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductName:   newCust.ProductName,
 		ProductDesc:   newCust.ProductDesc,
 		ProductPrice:  newCust.ProductPrice,
-		ProductStock: newCust.ProductStock,
+		ProductStock:  newCust.ProductStock,
 		ProductImages: newCust.ProductImages,
 		Producttype:   newCust.Producttype,
 		CreatedBy:     newCust.CreatedBy,
@@ -103,7 +103,7 @@ func (s productSvc) UpdateProduct(id int, req domain.ProductRequest) error {
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
 		ProductPrice:  req.ProductPrice,
-		ProductStock: req.ProductStock,
+		ProductStock:  req.ProductStock,
 		ProductImages: req.ProductImages,
 		Producttype:   req.Producttype,
 		UpdatedBy:     req.UpdatedBy,
@@ -119,6 +119,64 @@ func (s productSvc) DeleteProduct(id int) error {
 	err := s.repo.Delete(id)
 	if err != nil {
 		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot delete product")
+	}
+	return nil
+}
+func (s productSvc) Search(productName string) (*[]domain.ProductRespone, error) {
+	custs, err := s.repo.Search(productName)
+	if err != nil {
+		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot get product form DB")
+	}
+	resp := []domain.ProductRespone{}
+	for _, c := range custs {
+		resp = append(resp, domain.ProductRespone{
+			ProductId:     c.ProductId,
+			ProductName:   c.ProductName,
+			Producttype:   c.Producttype,
+			ProductImages: c.ProductImages,
+			ProductPrice:  c.ProductPrice,
+			ProductDesc:   c.ProductDesc,
+			Status:        c.Status,
+			SellStatus:    c.SellStatus,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
+		})
+
+	}
+	return &resp, nil
+}
+
+func (s productSvc) UpdateStatusProduct(id int, req domain.StatusProduct) error {
+	cust := port.Product{
+		Status: req.Status,
+	}
+	err := s.repo.UpdateStatusProduct(id, cust.Status)
+	if err != nil {
+		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update Status: ")
+	}
+	return nil
+}
+func (s productSvc) UpdateCount(id int, req domain.ProductRequest) error {
+	currentTime := time.Now()
+	cust := port.Product{
+		Count:       +1,
+		UpdatedDate: currentTime.Format(time.DateTime),
+	}
+	err := s.repo.UpdateCount(id, cust)
+	if err != nil {
+		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update Count: ")
+	}
+	return nil
+}
+func (s productSvc) UpdateSellStatus(id int, req domain.SellStatusProduct) error {
+	cust := port.Product{
+		SellStatus: req.SellStatus,
+	}
+	err := s.repo.UpdateSellStatus(id, cust.SellStatus)
+	if err != nil {
+		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update Status: ")
 	}
 	return nil
 }

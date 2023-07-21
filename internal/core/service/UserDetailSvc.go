@@ -26,21 +26,21 @@ func (s userdetailSvc) GetAllUserDetail() ([]domain.UserDetailRespone, error) {
 	resp := []domain.UserDetailRespone{}
 	for _, c := range custs {
 		resp = append(resp, domain.UserDetailRespone{
-			UserdtId:        c.UserdtId,
-			CardId:          c.CardId,
-			SvcId:           c.SvcId,
-			FristNameUser:   c.FristNameUser,
-			LastNameUser:    c.LastNameUser,
-			UserAddress:     c.UserAddress,
-			UserZibId:       c.UserZibId,
-			UserPhone:       c.UserPhone,
-			UserEmail:       c.UserEmail,
-			UserImege:       c.UserImege,
-			UserId:          c.UserId,
-			CreatedBy:       c.CreatedBy,
-			CreatedDate:     c.CreatedDate,
-			UpdatedBy:       c.UpdatedBy,
-			UpdatedDate:     c.UpdatedDate,
+			UserdtId:      c.UserdtId,
+			CardId:        c.CardId,
+			SvcId:         c.SvcId,
+			FristNameUser: c.FristNameUser,
+			LastNameUser:  c.LastNameUser,
+			UserAddress:   c.UserAddress,
+			UserZibId:     c.UserZibId,
+			UserPhone:     c.UserPhone,
+			UserEmail:     c.UserEmail,
+			UserImege:     c.UserImege,
+			UserId:        c.UserId,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
 		})
 
 	}
@@ -53,20 +53,21 @@ func (s userdetailSvc) GetUserDetail(id int) (*domain.UserDetailRespone, error) 
 		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot get userdetail form DB")
 	}
 	resp := domain.UserDetailRespone{
-		CardId:          cust.CardId,
-		UserId:          cust.UserId,
-		SvcId:           cust.SvcId,
-		FristNameUser:   cust.FristNameUser,
-		LastNameUser:    cust.LastNameUser,
-		UserAddress:     cust.UserAddress,
-		UserZibId:       cust.UserZibId,
-		UserPhone:       cust.UserPhone,
-		UserEmail:       cust.UserEmail,
-		UserImege:       cust.UserImege,
-		CreatedBy:       cust.CreatedBy,
-		CreatedDate:     cust.CreatedDate,
-		UpdatedBy:       cust.UpdatedBy,
-		UpdatedDate:     cust.UpdatedDate,
+		CardId:        cust.CardId,
+		UserId:        cust.UserId,
+		SvcId:         cust.SvcId,
+		FristNameUser: cust.FristNameUser,
+		LastNameUser:  cust.LastNameUser,
+		UserAddress:   cust.UserAddress,
+		UserZibId:     cust.UserZibId,
+		ProvinceId:    cust.ProvinceId,
+		UserPhone:     cust.UserPhone,
+		UserEmail:     cust.UserEmail,
+		UserImege:     cust.UserImege,
+		CreatedBy:     cust.CreatedBy,
+		CreatedDate:   cust.CreatedDate,
+		UpdatedBy:     cust.UpdatedBy,
+		UpdatedDate:   cust.UpdatedDate,
 	}
 	return &resp, nil
 }
@@ -95,18 +96,19 @@ func (s userdetailSvc) AddUserDetail(req domain.UserDetailRequest) (*domain.User
 		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot save userdetail")
 	}
 	resp := domain.UserDetailRespone{
-		CardId:          newCust.CardId,
-		SvcId:           newCust.SvcId,
-		FristNameUser:   newCust.FristNameUser,
-		LastNameUser:    newCust.LastNameUser,
-		UserAddress:     newCust.UserAddress,
-		UserZibId:       newCust.UserZibId,
-		UserPhone:       newCust.UserPhone,
-		UserEmail:       newCust.UserEmail,
-		UserImege:       newCust.UserImege,
-		UserId:          newCust.UserId,
-		CreatedBy:       newCust.CreatedBy,
-		CreatedDate:     newtime.Format(time.DateTime),
+		CardId:        newCust.CardId,
+		SvcId:         newCust.SvcId,
+		FristNameUser: newCust.FristNameUser,
+		LastNameUser:  newCust.LastNameUser,
+		UserAddress:   newCust.UserAddress,
+		UserZibId:     newCust.UserZibId,
+		ProvinceId:    newCust.ProvinceId,
+		UserPhone:     newCust.UserPhone,
+		UserEmail:     newCust.UserEmail,
+		UserImege:     newCust.UserImege,
+		UserId:        newCust.UserId,
+		CreatedBy:     newCust.CreatedBy,
+		CreatedDate:   newtime.Format(time.DateTime),
 	}
 
 	return &resp, nil

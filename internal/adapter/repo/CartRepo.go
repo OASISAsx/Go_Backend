@@ -25,13 +25,13 @@ func (c cartRepo) GetAll() ([]port.Cart, error) {
 	return carts, nil
 }
 
-func (c cartRepo) GetById(id int) (*port.Cart, error) {
-	cart := port.Cart{}
-	err := c.db.First(&cart, id).Error
+func (c cartRepo) GetById(id int) ([]port.Cart, error) {
+	cart := []port.Cart{}
+	err := c.db.Where("user_id = ?", id).Find(&cart).Error
 	if err != nil {
 		return nil, err
 	}
-	return &cart, nil
+	return cart, nil
 }
 
 func (c cartRepo) Create(cart port.Cart) (*port.Cart, error) {

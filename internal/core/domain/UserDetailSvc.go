@@ -40,6 +40,7 @@ type UserDetailRespone struct {
 	LastNameUser    string `json:"lastnameuser"`
 	UserAddress     string `json:"useraddress"`
 	UserZibId       string `json:"userzibId"`
+	ProvinceId      string `json:"provinceid"`
 	UserPhone       string `json:"userphone"`
 	UserEmail       string `json:"useremail"`
 	UserImege       string `json:"userimege"`
