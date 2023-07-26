@@ -98,6 +98,9 @@ func bindBuyDetail(g gin.Engine) {
 	{
 		v1.GET("/buydetails", hdl.GetBuyDetails)
 		v1.GET("/buydetail/:buydetailID", hdl.GetBuyDetail)
+		v1.GET("/buydetails/:buydetailID", hdl.GetAllBuyDetailId)
+		v1.GET("/buydetails/search/:name", hdl.SearchBuyDetail)
+		v1.GET("/buydetails/user/:UserId", hdl.GetAllUserId)
 		v1.POST("/buydetail", hdl.AddBuyDetail)
 		v1.PUT("/buydetail/:buydetailID", hdl.UpdateBuyDetail)
 		v1.DELETE("/buydetail/:buydetailID", hdl.DeleteBuyDetail)

@@ -2,23 +2,29 @@ package port
 
 type BuyDetailRepo interface {
 	GetAll() ([]BuyDetail, error)
-	GetById(BuyDetail int) (*BuyDetail, error)
+	Search(string) ([]BuyDetail, error)
+	GetAllId(int) ([]BuyDetail, error)
+	GetAllUserId(int) ([]BuyDetail, error)
+	GetById(id int) (*BuyDetail, error)
 	Create(BuyDetail) (*BuyDetail, error)
 	Update(int, BuyDetail) error
 	Delete(int) error
 }
 
 type BuyDetail struct {
-	BuyId      uint `gorm:"primaryKey;autoIncrement;type:int(10)"`
-	StoreId    string
-	ReserveId  string
-	ProductId  string
-	QrCode     string
-	PayId      string
-	CreatedBy   string
-	CreatedDate string
-	UpdatedBy   string `gorm:"null"`
-	UpdatedDate string `gorm:"null"`
+	PayId        uint   `gorm:"primaryKey;autoIncrement;type:int(10)"`
+	UserId       uint   `gorm:"notnull;type:int(10)"`
+	ProductId    uint   `gorm:"notnull;type:int(10)"`
+	ById         uint   `gorm:"notnull;type:int(10)"`
+	PaySlip      string `gorm:"notnull"`
+	PayStatus    string `gorm:"notnull;default=กำลังดำเนินการ;type:varchar(20)"`
+	ProductName  string `gorm:"notnull;type:varchar(50)"`
+	ProductPrice int    `gorm:"notnull;type:int(10)"`
+	ProductDesc  string `gorm:"notnull;type:varchar(100)"`
+	CreatedBy    string
+	CreatedDate  string
+	UpdatedBy    string `gorm:"null"`
+	UpdatedDate  string `gorm:"null"`
 }
 
 func (c BuyDetail) TableName() string {

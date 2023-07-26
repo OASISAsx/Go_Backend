@@ -16,7 +16,7 @@ type CartRequest struct {
 	ProductDesc   string `json:"productdesc"`
 	ProductImages string `json:"productimages"`
 	ProductType   string `json:"producttype"`
-	ProductPice   string `json:"productpice"`
+	ProductPrice  int    `json:"productpice"`
 	ProductStock  string `json:"productstock"`
 	CreatedBy     string `json:"createdby"`
 	CreatedDate   string `json:"createddate"`
@@ -30,9 +30,10 @@ type CartRespone struct {
 	UserId        uint   `json:"userid"`
 	ProductId     uint   `json:"productid"`
 	ProductName   string `json:"productname"`
+	ProductDesc   string `json:"productdesc"`
 	ProductImages string `json:"productimages"`
 	ProductType   string `json:"producttype"`
-	ProductPice   string `json:"productpice"`
+	ProductPrice  int    `json:"productprice"`
 	ProductStock  string `json:"productstock"`
 	CreatedBy     string `json:"createdby"`
 	CreatedDate   string `json:"createddate"`

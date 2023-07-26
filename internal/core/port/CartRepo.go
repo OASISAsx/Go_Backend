@@ -17,7 +17,7 @@ type Cart struct {
 	ProductDesc   string
 	ProductType   string
 	ProductImages string
-	ProductPrice  string
+	ProductPrice  int
 	ProductStock  string
 	CreatedBy     string
 	CreatedDate   string

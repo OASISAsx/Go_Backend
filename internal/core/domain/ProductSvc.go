@@ -16,10 +16,10 @@ type ProductRequest struct {
 	SvcId         uint   `json:"svcid"`
 	ProductName   string `json:"productname"`
 	ProductDesc   string `json:"productdesc"`
-	ProductPrice  string `json:"productprice"`
+	ProductPrice  int    `json:"productprice"`
 	ProductStock  string `json:"productstock"`
 	ProductImages string `json:"productimages"`
-	Producttype   string `json:"producttype"`
+	ProductType   string `json:"producttype"`
 	Status        bool   `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`
 	Count         int    `json:"count"`
@@ -34,10 +34,10 @@ type ProductRespone struct {
 	SvcId         uint   `json:"svcid"`
 	ProductName   string `json:"productname"`
 	ProductDesc   string `json:"productdesc"`
-	ProductPrice  string `json:"productprice"`
+	ProductPrice  int    `json:"productprice"`
 	ProductStock  string `json:"productstock"`
 	ProductImages string `json:"productimages"`
-	Producttype   string `json:"producttype"`
+	ProductType   string `json:"producttype"`
 	Status        bool   `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`
 	Count         int    `json:"count"`

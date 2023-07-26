@@ -17,8 +17,8 @@ type Product struct {
 	SvcId         uint
 	ProductName   string
 	ProductDesc   string `gorm:"notnull;type:varchar(500)"`
-	Producttype   string
-	ProductPrice  string
+	ProductType   string
+	ProductPrice  int `gorm:"type:int(20)"`
 	ProductStock  string
 	ProductImages string
 	Status        bool `gorm:"column:status;notnull"`

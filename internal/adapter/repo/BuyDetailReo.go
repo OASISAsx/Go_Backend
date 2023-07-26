@@ -2,6 +2,7 @@ package repo
 
 import (
 	"collection/internal/core/port"
+	"errors"
 
 	"gorm.io/gorm"
 )
@@ -16,6 +17,15 @@ func NewBuyDetailRepo(db *gorm.DB) port.BuyDetailRepo {
 	}
 }
 
+func (c buydetailRepo) Search(name string) ([]port.BuyDetail, error) {
+	buydetails := []port.BuyDetail{}
+	result := c.db.Find(&buydetails, "ticket_name LIKE ? OR ticket_price LIKE ? OR ticket_desc LIKE ?", "%"+name+"%", "%"+name+"%", "%"+name+"%")
+
+	if result.Error != nil {
+		return buydetails, errors.New("payment not found")
+	}
+	return buydetails, nil
+}
 func (c buydetailRepo) GetAll() ([]port.BuyDetail, error) {
 	buydetails := []port.BuyDetail{}
 	err := c.db.Find(&buydetails).Error
@@ -56,4 +66,21 @@ func (c buydetailRepo) Delete(id int) error {
 		return err
 	}
 	return nil
+}
+func (c buydetailRepo) GetAllId(id int) ([]port.BuyDetail, error) {
+	buydetails := []port.BuyDetail{}
+	err := c.db.Where("by_id = ?", id).Find(&buydetails).Error
+	if err != nil {
+		return nil, err
+	}
+	return buydetails, nil
+}
+
+func (c buydetailRepo) GetAllUserId(id int) ([]port.BuyDetail, error) {
+	buydetails := []port.BuyDetail{}
+	err := c.db.Where("user_id = ?", id).Find(&buydetails).Error
+	if err != nil {
+		return nil, err
+	}
+	return buydetails, nil
 }

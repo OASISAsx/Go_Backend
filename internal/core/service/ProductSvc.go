@@ -33,7 +33,7 @@ func (s productSvc) GetAllProduct() ([]domain.ProductRespone, error) {
 			ProductPrice:  c.ProductPrice,
 			ProductStock:  c.ProductStock,
 			ProductImages: c.ProductImages,
-			Producttype:   c.Producttype,
+			ProductType:   c.ProductType,
 			CreatedBy:     c.CreatedBy,
 			CreatedDate:   c.CreatedDate,
 			UpdatedBy:     c.UpdatedBy,
@@ -57,7 +57,7 @@ func (s productSvc) GetById(id int) (*domain.ProductRespone, error) {
 		ProductStock:  cust.ProductStock,
 		ProductDesc:   cust.ProductDesc,
 		ProductImages: cust.ProductImages,
-		Producttype:   cust.Producttype,
+		ProductType:   cust.ProductType,
 		CreatedBy:     cust.CreatedBy,
 		CreatedDate:   cust.CreatedDate,
 		UpdatedBy:     cust.UpdatedBy,
@@ -74,7 +74,7 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductPrice:  req.ProductPrice,
 		ProductStock:  req.ProductStock,
 		ProductImages: req.ProductImages,
-		Producttype:   req.Producttype,
+		ProductType:   req.ProductType,
 		CreatedBy:     req.CreatedBy,
 		CreatedDate:   newtime.Format(time.DateTime),
 	}
@@ -89,7 +89,7 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductPrice:  newCust.ProductPrice,
 		ProductStock:  newCust.ProductStock,
 		ProductImages: newCust.ProductImages,
-		Producttype:   newCust.Producttype,
+		ProductType:   newCust.ProductType,
 		CreatedBy:     newCust.CreatedBy,
 		CreatedDate:   newtime.Format(time.DateTime),
 	}
@@ -105,7 +105,7 @@ func (s productSvc) UpdateProduct(id int, req domain.ProductRequest) error {
 		ProductPrice:  req.ProductPrice,
 		ProductStock:  req.ProductStock,
 		ProductImages: req.ProductImages,
-		Producttype:   req.Producttype,
+		ProductType:   req.ProductType,
 		UpdatedBy:     req.UpdatedBy,
 		UpdatedDate:   newtime.Format(time.DateTime),
 	}
@@ -132,7 +132,7 @@ func (s productSvc) Search(productName string) (*[]domain.ProductRespone, error)
 		resp = append(resp, domain.ProductRespone{
 			ProductId:     c.ProductId,
 			ProductName:   c.ProductName,
-			Producttype:   c.Producttype,
+			ProductType:   c.ProductType,
 			ProductImages: c.ProductImages,
 			ProductPrice:  c.ProductPrice,
 			ProductDesc:   c.ProductDesc,
