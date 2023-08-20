@@ -26,19 +26,23 @@ func (s buydetailSvc) GetAllBuyDetail() ([]domain.BuyDetailRespone, error) {
 	resp := []domain.BuyDetailRespone{}
 	for _, c := range custs {
 		resp = append(resp, domain.BuyDetailRespone{
-			PayId:        c.PayId,
-			UserId:       c.UserId,
-			ProductId:    c.ProductId,
-			ById:         c.ById,
-			PaySlip:      c.PaySlip,
-			PayStatus:    c.PayStatus,
-			ProductName:  c.ProductName,
-			ProductPrice: c.ProductPrice,
-			ProductDesc:  c.ProductDesc,
-			CreatedBy:    c.CreatedBy,
-			CreatedDate:  c.CreatedDate,
-			UpdatedBy:    c.UpdatedBy,
-			UpdatedDate:  c.UpdatedDate,
+			PayId:         c.PayId,
+			UserId:        c.UserId,
+			ProductId:     c.ProductId,
+			ById:          c.ById,
+			PaySlip:       c.PaySlip,
+			ParNum:        c.ParNum,
+			TransPort:     c.TransPort,
+			PayStatus:     c.PayStatus,
+			ProductName:   c.ProductName,
+			ProductImages: c.ProductImages,
+			ProductPrice:  c.ProductPrice,
+			ProductType:   c.ProductType,
+			ProductDesc:   c.ProductDesc,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
 		})
 
 	}
@@ -52,18 +56,22 @@ func (s buydetailSvc) SearchBuyDetail(name string) (*[]domain.BuyDetailRespone, 
 	resp := []domain.BuyDetailRespone{}
 	for _, c := range custs {
 		resp = append(resp, domain.BuyDetailRespone{
-			PayId:        c.PayId,
-			UserId:       c.UserId,
-			ProductId:    c.ProductId,
-			PaySlip:      c.PaySlip,
-			PayStatus:    c.PayStatus,
-			ProductName:  c.ProductName,
-			ProductPrice: c.ProductPrice,
-			ProductDesc:  c.ProductDesc,
-			CreatedBy:    c.CreatedBy,
-			CreatedDate:  c.CreatedDate,
-			UpdatedBy:    c.UpdatedBy,
-			UpdatedDate:  c.UpdatedDate,
+			PayId:         c.PayId,
+			UserId:        c.UserId,
+			ProductId:     c.ProductId,
+			PaySlip:       c.PaySlip,
+			ParNum:        c.ParNum,
+			TransPort:     c.TransPort,
+			PayStatus:     c.PayStatus,
+			ProductName:   c.ProductName,
+			ProductImages: c.ProductImages,
+			ProductPrice:  c.ProductPrice,
+			ProductType:   c.ProductType,
+			ProductDesc:   c.ProductDesc,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
 		})
 	}
 	return &resp, nil
@@ -76,50 +84,62 @@ func (s buydetailSvc) GetBuyDetail(id int) (*domain.BuyDetailRespone, error) {
 	}
 	resp := domain.BuyDetailRespone{
 
-		PayId:        cust.PayId,
-		UserId:       cust.UserId,
-		ById:         cust.ById,
-		ProductId:    cust.ProductId,
-		PaySlip:      cust.PaySlip,
-		PayStatus:    cust.PayStatus,
-		ProductName:  cust.ProductName,
-		ProductPrice: cust.ProductPrice,
-		ProductDesc:  cust.ProductDesc,
-		CreatedBy:    cust.CreatedBy,
-		CreatedDate:  cust.CreatedDate,
-		UpdatedBy:    cust.UpdatedBy,
-		UpdatedDate:  cust.UpdatedDate,
+		PayId:         cust.PayId,
+		UserId:        cust.UserId,
+		ById:          cust.ById,
+		ProductId:     cust.ProductId,
+		PaySlip:       cust.PaySlip,
+		PayStatus:     cust.PayStatus,
+		ParNum:        cust.ParNum,
+		TransPort:     cust.TransPort,
+		ProductName:   cust.ProductName,
+		ProductImages: cust.ProductImages,
+		ProductPrice:  cust.ProductPrice,
+		ProductType:   cust.ProductType,
+		ProductDesc:   cust.ProductDesc,
+		CreatedBy:     cust.CreatedBy,
+		CreatedDate:   cust.CreatedDate,
+		UpdatedBy:     cust.UpdatedBy,
+		UpdatedDate:   cust.UpdatedDate,
 	}
 	return &resp, nil
 }
 func (s buydetailSvc) AddBuyDetail(req domain.BuyDetailRequest) (*domain.BuyDetailRespone, error) {
 	newtime := time.Now()
 	cust := port.BuyDetail{
-		UserId:       req.UserId,
-		ProductId:    req.ProductId,
-		ById:         req.ById,
-		PaySlip:      req.PaySlip,
-		PayStatus:    "กำลังดำเนินการ",
-		ProductName:  req.ProductName,
-		ProductPrice: req.ProductPrice,
-		ProductDesc:  req.ProductDesc,
-		CreatedBy:    req.CreatedBy,
-		CreatedDate:  newtime.Format(time.DateTime),
+		UserId:        req.UserId,
+		ProductId:     req.ProductId,
+		ById:          req.ById,
+		PaySlip:       req.PaySlip,
+		PayStatus:     "กำลังดำเนินการ",
+		ParNum:        req.ParNum,
+		TransPort:     req.TransPort,
+		ProductName:   req.ProductName,
+		ProductImages: req.ProductImages,
+		ProductPrice:  req.ProductPrice,
+		ProductType:   req.ProductType,
+		ProductDesc:   req.ProductDesc,
+		CreatedBy:     req.CreatedBy,
+		CreatedDate:   newtime.Format(time.DateTime),
 	}
 	newCust, err := s.repo.Create(cust)
 	if err != nil {
 		return nil, errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot save buydetail")
 	}
 	resp := domain.BuyDetailRespone{
-		UserId:       newCust.UserId,
-		ProductId:    newCust.ProductId,
-		PaySlip:      newCust.PaySlip,
-		PayStatus:    newCust.PayStatus,
-		ProductName:  newCust.ProductName,
-		ProductPrice: newCust.ProductPrice,
-		ProductDesc:  newCust.ProductDesc,
-		CreatedBy:    newCust.CreatedBy,
-		CreatedDate:  newtime.Format(time.DateTime),
+		UserId:        newCust.UserId,
+		ProductId:     newCust.ProductId,
+		PaySlip:       newCust.PaySlip,
+		ParNum:        newCust.ParNum,
+		TransPort:     newCust.TransPort,
+		PayStatus:     newCust.PayStatus,
+		ProductName:   newCust.ProductName,
+		ProductImages: newCust.ProductImages,
+		ProductPrice:  newCust.ProductPrice,
+		ProductType:   newCust.ProductType,
+		ProductDesc:   newCust.ProductDesc,
+		CreatedBy:     newCust.CreatedBy,
+		CreatedDate:   newtime.Format(time.DateTime),
 	}
 
 	return &resp, nil
@@ -128,7 +148,9 @@ func (s buydetailSvc) UpdateBuyDetail(id int, req domain.BuyDetailRequest) error
 	newtime := time.Now()
 	cust := port.BuyDetail{
 
-		PayStatus: req.PayStatus,
+		ParNum:      req.ParNum,
+		TransPort:   req.TransPort,
+		PayStatus:   req.PayStatus,
 		UpdatedBy:   "Admin",
 		UpdatedDate: newtime.Format(time.DateTime),
 	}
@@ -153,19 +175,23 @@ func (s buydetailSvc) GetAllBuyDetailId(id int) ([]domain.BuyDetailRespone, erro
 	resp := []domain.BuyDetailRespone{}
 	for _, c := range custs {
 		resp = append(resp, domain.BuyDetailRespone{
-			PayId:       c.PayId,
-			UserId:      c.UserId,
-			ProductId:   c.ProductId,
-			ById:        c.ById,
-			PaySlip:     c.PaySlip,
-			PayStatus:   c.PayStatus,
-			ProductName: c.ProductName,
-			ProductPrice: c.ProductPrice,
-			ProductDesc: c.ProductDesc,
-			CreatedBy:   c.CreatedBy,
-			CreatedDate: c.CreatedDate,
-			UpdatedBy:   c.UpdatedBy,
-			UpdatedDate: c.UpdatedDate,
+			PayId:         c.PayId,
+			UserId:        c.UserId,
+			ProductId:     c.ProductId,
+			ById:          c.ById,
+			PaySlip:       c.PaySlip,
+			ParNum:        c.ParNum,
+			TransPort:     c.TransPort,
+			PayStatus:     c.PayStatus,
+			ProductName:   c.ProductName,
+			ProductImages: c.ProductImages,
+			ProductPrice:  c.ProductPrice,
+			ProductType:   c.ProductType,
+			ProductDesc:   c.ProductDesc,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
 		})
 
 	}
@@ -179,19 +205,23 @@ func (s buydetailSvc) GetAllUserId(id int) ([]domain.BuyDetailRespone, error) {
 	resp := []domain.BuyDetailRespone{}
 	for _, c := range custs {
 		resp = append(resp, domain.BuyDetailRespone{
-			PayId:       c.PayId,
-			UserId:      c.UserId,
-			ProductId:   c.ProductId,
-			ById:        c.ById,
-			PaySlip:     c.PaySlip,
-			PayStatus:   c.PayStatus,
-			ProductName: c.ProductName,
-			ProductPrice: c.ProductPrice,
-			ProductDesc: c.ProductDesc,
-			CreatedBy:   c.CreatedBy,
-			CreatedDate: c.CreatedDate,
-			UpdatedBy:   c.UpdatedBy,
-			UpdatedDate: c.UpdatedDate,
+			PayId:         c.PayId,
+			UserId:        c.UserId,
+			ProductId:     c.ProductId,
+			ById:          c.ById,
+			PaySlip:       c.PaySlip,
+			ParNum:        c.ParNum,
+			TransPort:     c.TransPort,
+			PayStatus:     c.PayStatus,
+			ProductName:   c.ProductName,
+			ProductImages: c.ProductImages,
+			ProductPrice:  c.ProductPrice,
+			ProductType:   c.ProductType,
+			ProductDesc:   c.ProductDesc,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
 		})
 
 	}

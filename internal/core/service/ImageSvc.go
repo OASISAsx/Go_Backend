@@ -5,6 +5,7 @@ import (
 	"collection/utils"
 
 	"github.com/go-playground/validator/v10"
+	"fmt"
 )
 
 var (
@@ -14,13 +15,18 @@ var (
 type mediaUpload interface {
 	FileUpload(file domain.File) (string, error)
 	RemoteUpload(url domain.Url) (string, error)
+	MultiFileUpload(files []domain.File) ([]string, error)
 }
 
 type media struct{}
 
+
 func NewMediaUpload() mediaUpload {
+	
 	return &media{}
+	
 }
+
 
 func (*media) FileUpload(file domain.File) (string, error) {
 	//validate
@@ -50,4 +56,18 @@ func (*media) RemoteUpload(url domain.Url) (string, error) {
 		return "", err
 	}
 	return uploadUrl, nil
+}
+func (*media) MultiFileUpload(files []domain.File) ([]string, error) {
+	var uploadUrls []string
+
+	for _, file := range files {
+		// อัพโหลดแต่ละไฟล์ด้วยฟังก์ชัน FileUpload
+		uploadUrl, err := utils.ImageUploadHelper(file.File)
+		if err != nil {
+			// จัดการข้อผิดพลาดเมื่อเกิดข้อผิดพลาดในการอัพโหลด
+			return nil, fmt.Errorf("upload failed: %w", err)
+		}
+		uploadUrls = append(uploadUrls, uploadUrl)
+	}
+	return uploadUrls, nil
 }

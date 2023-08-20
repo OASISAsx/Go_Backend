@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	
 )
 
 func FileUpload() gin.HandlerFunc {
@@ -43,6 +44,61 @@ func FileUpload() gin.HandlerFunc {
 			})
 	}
 }
+func MultiFileUpload() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		form, err := c.MultipartForm()
+		if err != nil {
+			respondWithError(c, http.StatusInternalServerError, "Error parsing form data", err)
+			return
+		}
+
+		files := form.File["files"]
+		if len(files) == 0 {
+			respondWithError(c, http.StatusBadRequest, "No files uploaded", nil)
+			return
+		}
+
+		var domainFiles []domain.File
+		for _, fileHeader := range files {
+			file, err := fileHeader.Open()
+			if err != nil {
+				respondWithError(c, http.StatusInternalServerError, "Error opening uploaded file", err)
+				return
+			}
+			defer file.Close()
+
+			domainFiles = append(domainFiles, domain.File{File: file})
+		}
+
+		// เรียกใช้ MultiFileUpload ใน service เพื่ออัพโหลดไฟล์หลาย ๆ ไฟล์
+		uploadUrls, err := service.NewMediaUpload().MultiFileUpload(domainFiles)
+		if err != nil {
+			respondWithError(c, http.StatusInternalServerError, "Error uploading files", err)
+			return
+		}
+
+		// ตอบกลับด้วย URL ที่อัพโหลดแล้ว
+		respond(c, http.StatusOK, "success", gin.H{"urls": uploadUrls})
+	}
+}
+
+// ฟังก์ชันสำหรับการตอบกลับ
+func respond(c *gin.Context, statusCode int, message string, data interface{}) {
+	c.JSON(statusCode, gin.H{
+		"message": message,
+		"data":    data,
+	})
+}
+
+// ฟังก์ชันสำหรับการตอบกลับแสดงข้อผิดพลาด
+func respondWithError(c *gin.Context, statusCode int, errorMessage string, err error) {
+	c.JSON(statusCode, gin.H{
+		"error":   errorMessage,
+		"details": err.Error(),
+	})
+}
+
+
 
 func RemoteUpload() gin.HandlerFunc {
 	return func(c *gin.Context) {

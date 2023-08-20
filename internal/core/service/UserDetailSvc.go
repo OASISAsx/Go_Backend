@@ -35,12 +35,12 @@ func (s userdetailSvc) GetAllUserDetail() ([]domain.UserDetailRespone, error) {
 			UserZibId:     c.UserZibId,
 			UserPhone:     c.UserPhone,
 			UserEmail:     c.UserEmail,
-			UserImege:     c.UserImege,
-			UserId:        c.UserId,
-			CreatedBy:     c.CreatedBy,
-			CreatedDate:   c.CreatedDate,
-			UpdatedBy:     c.UpdatedBy,
-			UpdatedDate:   c.UpdatedDate,
+
+			UserId:      c.UserId,
+			CreatedBy:   c.CreatedBy,
+			CreatedDate: c.CreatedDate,
+			UpdatedBy:   c.UpdatedBy,
+			UpdatedDate: c.UpdatedDate,
 		})
 
 	}
@@ -63,11 +63,11 @@ func (s userdetailSvc) GetUserDetail(id int) (*domain.UserDetailRespone, error) 
 		ProvinceId:    cust.ProvinceId,
 		UserPhone:     cust.UserPhone,
 		UserEmail:     cust.UserEmail,
-		UserImege:     cust.UserImege,
-		CreatedBy:     cust.CreatedBy,
-		CreatedDate:   cust.CreatedDate,
-		UpdatedBy:     cust.UpdatedBy,
-		UpdatedDate:   cust.UpdatedDate,
+
+		CreatedBy:   cust.CreatedBy,
+		CreatedDate: cust.CreatedDate,
+		UpdatedBy:   cust.UpdatedBy,
+		UpdatedDate: cust.UpdatedDate,
 	}
 	return &resp, nil
 }
@@ -105,10 +105,10 @@ func (s userdetailSvc) AddUserDetail(req domain.UserDetailRequest) (*domain.User
 		ProvinceId:    newCust.ProvinceId,
 		UserPhone:     newCust.UserPhone,
 		UserEmail:     newCust.UserEmail,
-		UserImege:     newCust.UserImege,
-		UserId:        newCust.UserId,
-		CreatedBy:     newCust.CreatedBy,
-		CreatedDate:   newtime.Format(time.DateTime),
+
+		UserId:      newCust.UserId,
+		CreatedBy:   newCust.CreatedBy,
+		CreatedDate: newtime.Format(time.DateTime),
 	}
 
 	return &resp, nil

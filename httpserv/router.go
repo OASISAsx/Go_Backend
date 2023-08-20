@@ -138,6 +138,21 @@ func bindUserDetail(g gin.Engine) {
 	}
 
 }
+func bindSellerDetail(g gin.Engine) {
+	repo := repo.NewSellerDetailRepo(infrastructure.DB)
+	svc := service.NewSellerDetailSvc(repo)
+	hdl := handler.NewSellerDetailHdl(svc)
+
+	v1 := g.Group("/v1")
+	{
+		v1.GET("/sellerdetails", hdl.GetSellerDetails)
+		v1.GET("/sellerdetail/:sellerdetailID", hdl.GetSellerDetail)
+		v1.POST("/sellerdetail", hdl.AddSellerDetail)
+		v1.PUT("/sellerdetail/:sellerdetailID", hdl.UpdateSellerDetail)
+		v1.DELETE("/sellerdetail/:sellerdetailID", hdl.DeleteSellerDetail)
+	}
+
+}
 func bindAreaap(g gin.Engine) {
 	repo := repo.NewAreaapRepo(infrastructure.DB)
 	svc := service.NewAreaapSvc(repo)
@@ -177,11 +192,11 @@ func bindRegister(g gin.Engine) {
 		v1.GET("/register/:registerID", hdl.GetRegister)
 		v1.POST("/register", hdl.AddRegister)
 		v1.PUT("/register/:registerID", hdl.UpdateRegister)
-		v1.PUT("/user/role/:registerID", hdl.UpdateRole)
-		v1.PUT("/user/status/:registerID", hdl.UpdateStatus)
+		v1.PUT("/register/role/:registerID", hdl.UpdateRole)
+		v1.PUT("/register/status/:registerID", hdl.UpdateStatus)
 		v1.DELETE("/register/:registerID", hdl.DeleteRegister)
 		v1.POST("/login", hdl.Login)
-		v1.GET("/user", middleware.DeserializeUser(repo), hdl.GetRegisters)
+		v1.GET("/register", middleware.DeserializeUser(repo), hdl.GetRegisters)
 		v1.GET("/profile", middleware.DeserializeUser(repo), hdl.GetProfile)
 
 	}
@@ -192,22 +207,11 @@ func bindImage(g gin.Engine) {
 	{
 		v1.POST("/image", handler.FileUpload())
 		v1.POST("/remote", handler.RemoteUpload())
-	}
-}
-func bindCart(g gin.Engine) {
-	repo := repo.NewCartRepo(infrastructure.DB)
-	svc := service.NewCartSvc(repo)
-	hdl := handler.NewCartHdl(svc)
+		v1.POST("/images", handler.MultiFileUpload())
 
-	v1 := g.Group("/v1")
-	{
-		v1.GET("/carts", hdl.GetCarts)
-		v1.GET("/cart/:CartID", hdl.GetCart)
-		v1.POST("/cart", hdl.AddCart)
-		v1.PUT("/cart/:CartID", hdl.UpdateCart)
-		v1.DELETE("/cart/:CartID", hdl.DeleteCart)
 	}
 }
+
 func bindEmail(g gin.Engine) {
 	svc := service.NewSenderSvc()
 	hdl := handler.NewSenderHdl(svc)

@@ -12,19 +12,23 @@ type BuyDetailRepo interface {
 }
 
 type BuyDetail struct {
-	PayId        uint   `gorm:"primaryKey;autoIncrement;type:int(10)"`
-	UserId       uint   `gorm:"notnull;type:int(10)"`
-	ProductId    uint   `gorm:"notnull;type:int(10)"`
-	ById         uint   `gorm:"notnull;type:int(10)"`
-	PaySlip      string `gorm:"notnull"`
-	PayStatus    string `gorm:"notnull;default=กำลังดำเนินการ;type:varchar(20)"`
-	ProductName  string `gorm:"notnull;type:varchar(50)"`
-	ProductPrice int    `gorm:"notnull;type:int(10)"`
-	ProductDesc  string `gorm:"notnull;type:varchar(100)"`
-	CreatedBy    string
-	CreatedDate  string
-	UpdatedBy    string `gorm:"null"`
-	UpdatedDate  string `gorm:"null"`
+	PayId         uint   `gorm:"primaryKey;autoIncrement;type:int(10)"`
+	UserId        uint   `gorm:"notnull;type:int(10)"`
+	ProductId     uint   `gorm:"notnull;type:int(10)"`
+	ById          uint   `gorm:"notnull;type:int(10)"`
+	PaySlip       string `gorm:"notnull"`
+	ParNum        string
+	TransPort     string 
+	PayStatus     string `gorm:"notnull;default=กำลังดำเนินการ;type:varchar(20)"`
+	ProductName   string `gorm:"notnull;type:varchar(50)"`
+	ProductImages string
+	ProductPrice  int `gorm:"notnull;type:int(10)"`
+	ProductType   string
+	ProductDesc   string `gorm:"notnull;type:varchar(100)"`
+	CreatedBy     string
+	CreatedDate   string
+	UpdatedBy     string `gorm:"null"`
+	UpdatedDate   string `gorm:"null"`
 }
 
 func (c BuyDetail) TableName() string {

@@ -9,6 +9,9 @@ type File struct {
 type Url struct {
 	Url string `json:"url,omitempty" validate:"required"`
 }
+type MultiFile struct {
+	Files []multipart.File `json:"files,omitempty" validate:"required"`
+}
 
 type MediaResponse struct {
 	StatusCode int                    `json:"statusCode"`

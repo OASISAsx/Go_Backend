@@ -53,7 +53,7 @@ func (c buydetailRepo) Create(buydetail port.BuyDetail) (*port.BuyDetail, error)
 }
 
 func (c buydetailRepo) Update(id int, buydetail port.BuyDetail) error {
-	err := c.db.Model(&port.BuyDetail{}).Where("buy_id = ?", id).Updates(buydetail).Error
+	err := c.db.Model(&port.BuyDetail{}).Where("pay_id = ?", id).Updates(buydetail).Error
 	if err != nil {
 		return err
 	}

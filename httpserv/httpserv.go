@@ -26,7 +26,8 @@ func Run() {
 	bindAreadt(a.GinEngine())
 	bindRegister(a.GinEngine())
 	bindImage(a.GinEngine())
-	bindCart(a.GinEngine())
+	bindSellerDetail(a.GinEngine())
+
 	bindEmail(a.GinEngine())
 
 	port := fmt.Sprintf(":%v", viper.GetInt("app.port"))

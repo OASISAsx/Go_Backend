@@ -12,32 +12,40 @@ type BuyDetailSvc interface {
 }
 
 type BuyDetailRequest struct {
-	UserId       uint   `json:"userid"`
-	ProductId    uint   `json:"productid"`
-	ById         uint   `json:"byid"`
-	PaySlip      string `json:"payslip"`
-	PayStatus    string `json:"paystatus"`
-	ProductName  string `json:"productname"`
-	ProductPrice int   `json:"productprice"`
-	ProductDesc  string `json:"productdesc"`
-	CreatedBy    string `json:"createdby"`
-	CreatedDate  string `json:"createddate"`
-	UpdatedBy    string `json:"updatedby"`
-	UpdatedDate  string `json:"updateddate"`
+	UserId        uint   `json:"userid"`
+	ProductId     uint   `json:"productid"`
+	ById          uint   `json:"byid"`
+	PaySlip       string `json:"payslip"`
+	ParNum        string `json:"parnum"`
+	TransPort     string `json:"transport"`
+	PayStatus     string `json:"paymentstatus"`
+	ProductName   string `json:"productname"`
+	ProductImages string `json:"productimages"`
+	ProductPrice  int    `json:"productprice"`
+	ProductType   string `json:"producttype"`
+	ProductDesc   string `json:"productdesc"`
+	CreatedBy     string `json:"createdby"`
+	CreatedDate   string `json:"createddate"`
+	UpdatedBy     string `json:"updatedby"`
+	UpdatedDate   string `json:"updateddate"`
 }
 
 type BuyDetailRespone struct {
-	PayId        uint   `json:"payid"`
-	UserId       uint   `json:"userid"`
-	ProductId    uint   `json:"productid"`
-	ById         uint   `json:"byid"`
-	PaySlip      string `json:"payslip"`
-	PayStatus    string `json:"paystatus"`
-	ProductName  string `json:"productname"`
-	ProductPrice int   `json:"productprice"`
-	ProductDesc  string `json:"productdesc"`
-	CreatedBy    string `json:"createdby"`
-	CreatedDate  string `json:"createddate"`
-	UpdatedBy    string `json:"updatedby"`
-	UpdatedDate  string `json:"updateddate"`
+	PayId         uint   `json:"payid"`
+	UserId        uint   `json:"userid"`
+	ProductId     uint   `json:"productid"`
+	ById          uint   `json:"byid"`
+	PaySlip       string `json:"payslip"`
+	ParNum        string `json:"parnum"`
+	TransPort     string `json:"transport"`
+	PayStatus     string `json:"paymentstatus"`
+	ProductName   string `json:"productname"`
+	ProductImages string `json:"productimages"`
+	ProductPrice  int    `json:"productprice"`
+	ProductType   string `json:"producttype"`
+	ProductDesc   string `json:"productdesc"`
+	CreatedBy     string `json:"createdby"`
+	CreatedDate   string `json:"createddate"`
+	UpdatedBy     string `json:"updatedby"`
+	UpdatedDate   string `json:"updateddate"`
 }

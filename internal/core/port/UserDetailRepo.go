@@ -24,7 +24,9 @@ type UserDetail struct {
 	ProvinceId      string
 	UserPhone       string
 	UserEmail       string
-	UserImege       string
+	BankName        string `gorm:"notnull;type:varchar(100)"`
+	BankId          string `gorm:"notnull;type:varchar(10)"`
+	PersonCard      string `gorm:"null;type:longtext"`
 	RecordStatus    string
 	CreatedBy       string
 	CreatedDate     string
