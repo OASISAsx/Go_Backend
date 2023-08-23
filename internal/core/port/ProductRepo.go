@@ -21,6 +21,9 @@ type Product struct {
 	ProductPrice  int `gorm:"type:int(20)"`
 	ProductStock  string
 	ProductImages string
+	ProductImagex string
+	ProductImagey string
+	ProductImagez string
 	Status        bool `gorm:"column:status;notnull"`
 	SellStatus    bool `gorm:"notnull"`
 	Count         int  `gorm:"type:int(10)"`

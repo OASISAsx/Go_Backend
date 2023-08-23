@@ -207,7 +207,31 @@ func bindImage(g gin.Engine) {
 	{
 		v1.POST("/image", handler.FileUpload())
 		v1.POST("/remote", handler.RemoteUpload())
-		v1.POST("/images", handler.MultiFileUpload())
+
+	}
+}
+func bindImagex(g gin.Engine) {
+	v1 := g.Group("/v1")
+	{
+		v1.POST("/imagex", handler.FileUploads())
+		v1.POST("/remotex", handler.RemoteUploads())
+
+	}
+}
+func bindImagey(g gin.Engine) {
+	v1 := g.Group("/v1")
+	{
+		v1.POST("/imagey", handler.FileUploady())
+		v1.POST("/remotey", handler.RemoteUploady())
+
+	}
+}
+
+func bindImagez(g gin.Engine) {
+	v1 := g.Group("/v1")
+	{
+		v1.POST("/imagez", handler.FileUploadz())
+		v1.POST("/remotez", handler.RemoteUploadz())
 
 	}
 }

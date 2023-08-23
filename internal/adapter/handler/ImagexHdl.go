@@ -9,7 +9,7 @@ import (
 	
 )
 
-func FileUpload() gin.HandlerFunc {
+func FileUploads() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		//upload
 		formfile, _, err := c.Request.FormFile("file")
@@ -48,7 +48,7 @@ func FileUpload() gin.HandlerFunc {
 
 
 
-func RemoteUpload() gin.HandlerFunc {
+func RemoteUploads() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var url domain.Url
 

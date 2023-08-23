@@ -3,32 +3,31 @@ package service
 import (
 	"collection/internal/core/domain"
 	"collection/utils"
-
 	"github.com/go-playground/validator/v10"
 	
 )
 
 var (
-	validate = validator.New()
+	validateb = validator.New()
 )
 
-type mediaUpload interface {
-	FileUpload(file domain.File) (string, error)
+type mediaUploady interface {
+	FileUploadx(file domain.File) (string, error)
 	RemoteUpload(url domain.Url) (string, error)
-	
+
 }
 
-type media struct{}
+type mediay struct{}
 
 
-func NewMediaUpload() mediaUpload {
+func NewMediaUploady() mediaUpload {
 	
 	return &media{}
 	
 }
 
 
-func (*media) FileUpload(file domain.File) (string, error) {
+func (*media) FileUploady(file domain.File) (string, error) {
 	//validate
 	err := validate.Struct(file)
 	if err != nil {
@@ -43,7 +42,7 @@ func (*media) FileUpload(file domain.File) (string, error) {
 	return uploadUrl, nil
 }
 
-func (*media) RemoteUpload(url domain.Url) (string, error) {
+func (*media) RemoteUploady(url domain.Url) (string, error) {
 	//validate
 	err := validate.Struct(url)
 	if err != nil {

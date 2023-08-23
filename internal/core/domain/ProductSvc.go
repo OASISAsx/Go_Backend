@@ -19,6 +19,9 @@ type ProductRequest struct {
 	ProductPrice  int    `json:"productprice"`
 	ProductStock  string `json:"productstock"`
 	ProductImages string `json:"productimages"`
+	ProductImagex string `json:"productimagex"`
+	ProductImagey string `json:"productimagey"`
+	ProductImagez string `json:"productimagez"`
 	ProductType   string `json:"producttype"`
 	Status        bool   `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`
@@ -37,6 +40,9 @@ type ProductRespone struct {
 	ProductPrice  int    `json:"productprice"`
 	ProductStock  string `json:"productstock"`
 	ProductImages string `json:"productimages"`
+	ProductImagex string `json:"productimagex"`
+	ProductImagey string `json:"productimagey"`
+	ProductImagez string `json:"productimagez"`
 	ProductType   string `json:"producttype"`
 	Status        bool   `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`

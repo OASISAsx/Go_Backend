@@ -9,26 +9,27 @@ import (
 )
 
 var (
-	validate = validator.New()
+	validatec = validator.New()
 )
 
-type mediaUpload interface {
-	FileUpload(file domain.File) (string, error)
+
+type mediaUploadz interface {
+	FileUploadx(file domain.File) (string, error)
 	RemoteUpload(url domain.Url) (string, error)
 	
 }
 
-type media struct{}
+type mediaz struct{}
 
 
-func NewMediaUpload() mediaUpload {
+func NewMediaUploadz() mediaUpload {
 	
 	return &media{}
 	
 }
 
 
-func (*media) FileUpload(file domain.File) (string, error) {
+func (*media) FileUploadz(file domain.File) (string, error) {
 	//validate
 	err := validate.Struct(file)
 	if err != nil {
@@ -43,7 +44,7 @@ func (*media) FileUpload(file domain.File) (string, error) {
 	return uploadUrl, nil
 }
 
-func (*media) RemoteUpload(url domain.Url) (string, error) {
+func (*media) RemoteUploadz(url domain.Url) (string, error) {
 	//validate
 	err := validate.Struct(url)
 	if err != nil {

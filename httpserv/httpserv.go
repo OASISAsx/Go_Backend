@@ -26,6 +26,9 @@ func Run() {
 	bindAreadt(a.GinEngine())
 	bindRegister(a.GinEngine())
 	bindImage(a.GinEngine())
+	bindImagex(a.GinEngine())
+	bindImagey(a.GinEngine())
+	bindImagez(a.GinEngine())
 	bindSellerDetail(a.GinEngine())
 
 	bindEmail(a.GinEngine())
