@@ -34,13 +34,13 @@ func (s userdetailSvc) GetAllUserDetail() ([]domain.UserDetailRespone, error) {
 			UserAddress:   c.UserAddress,
 			UserZibId:     c.UserZibId,
 			UserPhone:     c.UserPhone,
-			UserEmail:     c.UserEmail,
-
-			UserId:      c.UserId,
-			CreatedBy:   c.CreatedBy,
-			CreatedDate: c.CreatedDate,
-			UpdatedBy:   c.UpdatedBy,
-			UpdatedDate: c.UpdatedDate,
+			UserId:        c.UserId,
+			Avatar:        c.Avatar,
+			Province:      c.Province,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
 		})
 
 	}
@@ -60,14 +60,13 @@ func (s userdetailSvc) GetUserDetail(id int) (*domain.UserDetailRespone, error) 
 		LastNameUser:  cust.LastNameUser,
 		UserAddress:   cust.UserAddress,
 		UserZibId:     cust.UserZibId,
-		ProvinceId:    cust.ProvinceId,
 		UserPhone:     cust.UserPhone,
-		UserEmail:     cust.UserEmail,
-
-		CreatedBy:   cust.CreatedBy,
-		CreatedDate: cust.CreatedDate,
-		UpdatedBy:   cust.UpdatedBy,
-		UpdatedDate: cust.UpdatedDate,
+		Avatar:        cust.Avatar,
+		Province:      cust.Province,
+		CreatedBy:     cust.CreatedBy,
+		CreatedDate:   cust.CreatedDate,
+		UpdatedBy:     cust.UpdatedBy,
+		UpdatedDate:   cust.UpdatedDate,
 	}
 	return &resp, nil
 }
@@ -89,6 +88,7 @@ func (s userdetailSvc) AddUserDetail(req domain.UserDetailRequest) (*domain.User
 		// UserPhone:       req.UserPhone,
 		// UserEmail:       req.UserEmail,
 		// UserImege:       req.UserImege,
+		Avatar:      "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
 		CreatedDate: newtime.Format(time.DateTime),
 	}
 	newCust, err := s.repo.Create(cust)
@@ -102,13 +102,12 @@ func (s userdetailSvc) AddUserDetail(req domain.UserDetailRequest) (*domain.User
 		LastNameUser:  newCust.LastNameUser,
 		UserAddress:   newCust.UserAddress,
 		UserZibId:     newCust.UserZibId,
-		ProvinceId:    newCust.ProvinceId,
 		UserPhone:     newCust.UserPhone,
-		UserEmail:     newCust.UserEmail,
-
-		UserId:      newCust.UserId,
-		CreatedBy:   newCust.CreatedBy,
-		CreatedDate: newtime.Format(time.DateTime),
+		Avatar:        newCust.Avatar,
+		Province:      newCust.Province,
+		UserId:        newCust.UserId,
+		CreatedBy:     newCust.CreatedBy,
+		CreatedDate:   newtime.Format(time.DateTime),
 	}
 
 	return &resp, nil
@@ -127,9 +126,9 @@ func (s userdetailSvc) UpdateUserDetail(id int, req domain.UserDetailRequest) er
 		UserZibId:   req.UserZibId,
 		// TCode:           req.TCode,
 		// ACode:           req.ACode,
-		ProvinceId: req.ProvinceId,
-		UserPhone:  req.UserPhone,
-		UserEmail:  req.UserEmail,
+		UserPhone: req.UserPhone,
+		Avatar:    req.Avatar,
+		Province:  req.Province,
 		// UserImege:       req.UserImege,
 		// UserId:          req.UserId,
 		// UpdatedBy:       req.UpdatedBy,

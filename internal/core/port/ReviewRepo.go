@@ -6,6 +6,7 @@ type ReviewRepo interface {
 	Create(Review) (*Review, error)
 	Update(int, Review) error
 	Delete(int) error
+	UpdateStatusReview(int, bool) error
 }
 
 type Review struct {
@@ -15,6 +16,7 @@ type Review struct {
 	RvImg       string
 	RvRank      string
 	RvComment   string
+	Status      bool   `gorm:"column:status;notnull;default:true"`
 	CreatedBy   string
 	CreatedDate string
 	UpdatedBy   string `gorm:"null"`

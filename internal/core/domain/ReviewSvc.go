@@ -5,6 +5,7 @@ type ReviewSvc interface {
 	GetReview(int) (*ReviewRespone, error)
 	AddReview(ReviewRequest) (*ReviewRespone, error)
 	UpdateReview(int, ReviewRequest) error
+	UpdateStatusRev(int, StatusRev) error
 	DeleteReview(int) error
 }
 
@@ -16,6 +17,7 @@ type ReviewRequest struct {
 	RvImg       string `json:"rvimg"`
 	RvRank      string `json:"rvrank"`
 	RvComment   string `json:"rvcomment"`
+	Status      bool   `json:"status"`
 	CreatedBy   string `json:"createdby"`
 	CreatedDate string `json:"createddate"`
 	UpdatedBy   string `json:"updatedby"`
@@ -29,8 +31,12 @@ type ReviewRespone struct {
 	RvImg       string `json:"rvimg"`
 	RvRank      string `json:"rvrank"`
 	RvComment   string `json:"rvcomment"`
+	Status      bool   `json:"status"`
 	CreatedBy   string `json:"createdby"`
 	CreatedDate string `json:"createddate"`
 	UpdatedBy   string `json:"updatedby"`
 	UpdatedDate string `json:"updateddate"`
+}
+type StatusRev struct {
+	Status bool `json:"status"`
 }

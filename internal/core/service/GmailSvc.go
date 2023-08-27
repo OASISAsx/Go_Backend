@@ -24,7 +24,7 @@ func (s sender) SendEmail(req domain.SenderEmail) error {
 		Image:   req.Image,
 	}
 
-	body := fmt.Sprintf(`<p>จาก <b>นักสะสม</b>: ผลการขาย %s</p>`, cust.Body)
+	body := fmt.Sprintf(`<p>จาก <b>นักสะสม</b>: คุณได้ทำ %s</p>`, cust.Body)
 	body += fmt.Sprintf(`<img src="%s" width="100" height="100" />`, cust.Image)
 
 	msg := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\r\n"

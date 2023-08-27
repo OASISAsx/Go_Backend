@@ -52,6 +52,7 @@ func bindReview(g gin.Engine) {
 		v1.POST("/review", hdl.AddReview)
 		v1.PUT("/review/:reviewID", hdl.UpdateReview)
 		v1.DELETE("/review/:reviewID", hdl.DeleteReview)
+		v1.PUT("review/status/:reviewID", hdl.UpdateReviewStatus)
 	}
 
 }
@@ -66,10 +67,8 @@ func bindProduct(g gin.Engine) {
 		v1.GET("/product/:productID", hdl.GetProduct)
 		v1.POST("/product", hdl.AddProduct)
 		v1.PUT("/product/:productID", hdl.UpdateProduct)
+		v1.PUT("/product/status/seller/:productID", hdl.UpdateSellStatus)
 		v1.DELETE("/product/:productID", hdl.DeleteProduct)
-		v1.PUT("/product/count/:ProductId", hdl.UpdateCount)
-		v1.PUT("/product/status/:ProductId", hdl.UpdateStatusProduct)
-		v1.PUT("/product/status/sell/:ProductId", hdl.UpdateSellStatus)
 		v1.GET("/search/:ProductName", hdl.Search)
 	}
 

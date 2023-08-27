@@ -92,28 +92,8 @@ func (h productHdl) Search(c *gin.Context) {
 	c.JSON(http.StatusOK, res)
 }
 
-func (h *productHdl) UpdateStatusProduct(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("productId"))
-	if err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
-	}
-	req := domain.StatusProduct{}
-	err = c.BindJSON(&req)
-	if err != nil {
-		c.Error(err)
-	}
-	err = h.svc.UpdateStatusProduct(id, req)
-	if err != nil {
-		c.Error(err)
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Update Product success!!",
-	})
-
-}
 func (h *productHdl) UpdateSellStatus(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("ProductId"))
+	id, err := strconv.Atoi(c.Param("productID"))
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 	}
@@ -128,27 +108,7 @@ func (h *productHdl) UpdateSellStatus(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Update Product success!!",
-	})
-
-}
-func (h *productHdl) UpdateCount(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("ProductId"))
-	if err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
-	}
-	req := domain.ProductRequest{}
-	err = c.BindJSON(&req)
-	if err != nil {
-		c.Error(err)
-	}
-	err = h.svc.UpdateCount(id, req)
-	if err != nil {
-		c.Error(err)
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Update Product success!!",
+		"message": "Update Ticket success!!",
 	})
 
 }

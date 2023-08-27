@@ -26,7 +26,6 @@ type RegisterReq struct {
 	Password     string `json:"password" binding:"required"`
 	Nickname     string `json:"nickname" binding:"required"`
 	Email        string `json:"email" binding:"required"`
-	Avatar       string `json:"Avatar" `
 	RecordStatus bool `json:"recordstatus" binding:"required"`
 	CreatedBy    string `json:"createdby" binding:"required"`
 	CreatedDate  string `json:"createddate" binding:"required"`
@@ -41,7 +40,6 @@ type RegisterResp struct {
 	Password     string `json:"password" binding:"required"`
 	Nickname     string `json:"nickname" binding:"required"`
 	Email        string `json:"email" binding:"required"`
-	Avatar       string `json:"Avatar" `
 	RecordStatus bool `json:"recordstatus" binding:"required"`
 	CreatedBy    string `json:"createdby" binding:"required"`
 	CreatedDate  string `json:"createddate" binding:"required"`

@@ -18,7 +18,6 @@ type Register struct {
 	Password     string
 	Nickname     string
 	Email        string
-	Avatar       string
 	RecordStatus bool
 	CreatedBy    string
 	CreatedDate  string

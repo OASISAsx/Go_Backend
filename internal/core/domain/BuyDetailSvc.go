@@ -22,6 +22,7 @@ type BuyDetailRequest struct {
 	ProductName   string `json:"productname"`
 	ProductImages string `json:"productimages"`
 	ProductPrice  int    `json:"productprice"`
+	ProductStock  string    `json:"productstock"`
 	ProductType   string `json:"producttype"`
 	ProductDesc   string `json:"productdesc"`
 	CreatedBy     string `json:"createdby"`
@@ -42,6 +43,7 @@ type BuyDetailRespone struct {
 	ProductName   string `json:"productname"`
 	ProductImages string `json:"productimages"`
 	ProductPrice  int    `json:"productprice"`
+	ProductStock  string    `json:"productstock"`
 	ProductType   string `json:"producttype"`
 	ProductDesc   string `json:"productdesc"`
 	CreatedBy     string `json:"createdby"`

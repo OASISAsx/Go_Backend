@@ -37,10 +37,12 @@ func (s productSvc) GetAllProduct() ([]domain.ProductRespone, error) {
 			ProductImagey: c.ProductImagey,
 			ProductImagez: c.ProductImagez,
 			ProductType:   c.ProductType,
-			CreatedBy:     c.CreatedBy,
-			CreatedDate:   c.CreatedDate,
-			UpdatedBy:     c.UpdatedBy,
-			UpdatedDate:   c.UpdatedDate,
+			Status:        c.Status,
+			SellStatus:    c.SellStatus,
+			CreatedBy:   c.CreatedBy,
+			CreatedDate: c.CreatedDate,
+			UpdatedBy:   c.UpdatedBy,
+			UpdatedDate: c.UpdatedDate,
 		})
 
 	}
@@ -64,6 +66,7 @@ func (s productSvc) GetById(id int) (*domain.ProductRespone, error) {
 		ProductImagey: cust.ProductImagey,
 		ProductImagez: cust.ProductImagez,
 		ProductType:   cust.ProductType,
+		Status:        cust.Status,
 		CreatedBy:     cust.CreatedBy,
 		CreatedDate:   cust.CreatedDate,
 		UpdatedBy:     cust.UpdatedBy,
@@ -78,14 +81,16 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
 		ProductPrice:  req.ProductPrice,
-		ProductStock:  req.ProductStock,
+		ProductStock:  "1",
 		ProductImages: req.ProductImages,
 		ProductImagex: req.ProductImagex,
 		ProductImagey: req.ProductImagey,
 		ProductImagez: req.ProductImagez,
-		ProductType:   req.ProductType,
-		CreatedBy:     req.CreatedBy,
-		CreatedDate:   newtime.Format(time.DateTime),
+		Status:        "กำลังดำเนินการ",
+		SellStatus:    false,
+		ProductType: req.ProductType,
+		CreatedBy:   req.CreatedBy,
+		CreatedDate: newtime.Format(time.DateTime),
 	}
 	newCust, err := s.repo.Create(cust)
 	if err != nil {
@@ -101,6 +106,7 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductImagex: newCust.ProductImagex,
 		ProductImagey: newCust.ProductImagey,
 		ProductImagez: newCust.ProductImagez,
+		Status:        newCust.Status,
 		ProductType:   newCust.ProductType,
 		CreatedBy:     newCust.CreatedBy,
 		CreatedDate:   newtime.Format(time.DateTime),
@@ -121,7 +127,8 @@ func (s productSvc) UpdateProduct(id int, req domain.ProductRequest) error {
 		ProductImagey: req.ProductImagey,
 		ProductImagez: req.ProductImagez,
 		ProductType:   req.ProductType,
-		UpdatedBy:     req.UpdatedBy,
+		Status:        req.Status,
+		UpdatedBy:     "Admin",
 		UpdatedDate:   newtime.Format(time.DateTime),
 	}
 	err := s.repo.Update(id, cust)
@@ -156,38 +163,16 @@ func (s productSvc) Search(productName string) (*[]domain.ProductRespone, error)
 			ProductDesc:   c.ProductDesc,
 			Status:        c.Status,
 			SellStatus:    c.SellStatus,
-			CreatedBy:     c.CreatedBy,
-			CreatedDate:   c.CreatedDate,
-			UpdatedBy:     c.UpdatedBy,
-			UpdatedDate:   c.UpdatedDate,
+			CreatedBy:   c.CreatedBy,
+			CreatedDate: c.CreatedDate,
+			UpdatedBy:   c.UpdatedBy,
+			UpdatedDate: c.UpdatedDate,
 		})
 
 	}
 	return &resp, nil
 }
 
-func (s productSvc) UpdateStatusProduct(id int, req domain.StatusProduct) error {
-	cust := port.Product{
-		Status: req.Status,
-	}
-	err := s.repo.UpdateStatusProduct(id, cust.Status)
-	if err != nil {
-		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update Status: ")
-	}
-	return nil
-}
-func (s productSvc) UpdateCount(id int, req domain.ProductRequest) error {
-	currentTime := time.Now()
-	cust := port.Product{
-		Count:       +1,
-		UpdatedDate: currentTime.Format(time.DateTime),
-	}
-	err := s.repo.UpdateCount(id, cust)
-	if err != nil {
-		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update Count: ")
-	}
-	return nil
-}
 func (s productSvc) UpdateSellStatus(id int, req domain.SellStatusProduct) error {
 	cust := port.Product{
 		SellStatus: req.SellStatus,

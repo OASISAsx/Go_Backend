@@ -49,6 +49,13 @@ func (c reviewRepo) Update(id int, review port.Review) error {
 	}
 	return nil
 }
+func (c reviewRepo) UpdateStatusReview(id int, status bool) error {
+	err := c.db.Model(&port.Review{}).Where("rev_id = ?", id).Update("status", status).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 func (c reviewRepo) Delete(id int) error {
 	err := c.db.Delete(&port.Review{}, id).Error

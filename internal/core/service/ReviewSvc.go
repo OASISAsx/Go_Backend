@@ -32,6 +32,7 @@ func (s reviewSvc) GetAllReview() ([]domain.ReviewRespone, error) {
 			RvImg:       c.RvImg,
 			RvRank:      c.RvRank,
 			RvComment:   c.RvComment,
+			Status:      c.Status,
 			CreatedBy:   c.CreatedBy,
 			CreatedDate: c.CreatedDate,
 			UpdatedBy:   c.UpdatedBy,
@@ -51,7 +52,6 @@ func (s reviewSvc) GetReview(id int) (*domain.ReviewRespone, error) {
 		RvId:        cust.RvId,
 		UserId:      cust.UserId,
 		ProductId:   cust.ProductId,
-		RvImg:       cust.RvImg,
 		RvRank:      cust.RvRank,
 		RvComment:   cust.RvComment,
 		CreatedBy:   cust.CreatedBy,
@@ -69,6 +69,7 @@ func (s reviewSvc) AddReview(req domain.ReviewRequest) (*domain.ReviewRespone, e
 		RvImg:       req.RvImg,
 		RvRank:      req.RvRank,
 		RvComment:   req.RvComment,
+		Status:      true,
 		CreatedBy:   req.CreatedBy,
 		CreatedDate: newtime.Format(time.DateTime),
 	}
@@ -82,6 +83,7 @@ func (s reviewSvc) AddReview(req domain.ReviewRequest) (*domain.ReviewRespone, e
 		RvImg:       newCust.RvImg,
 		RvRank:      newCust.RvRank,
 		RvComment:   newCust.RvComment,
+		Status:      newCust.Status,
 		CreatedBy:   newCust.CreatedBy,
 		CreatedDate: newtime.Format(time.DateTime),
 	}
@@ -91,15 +93,23 @@ func (s reviewSvc) AddReview(req domain.ReviewRequest) (*domain.ReviewRespone, e
 func (s reviewSvc) UpdateReview(id int, req domain.ReviewRequest) error {
 	newtime := time.Now()
 	cust := port.Review{
-		UserId:      req.UserId,
-		ProductId:   req.ProductId,
-		RvImg:       req.RvImg,
+		
 		RvRank:      req.RvRank,
 		RvComment:   req.RvComment,
 		UpdatedBy:   req.UpdatedBy,
 		UpdatedDate: newtime.Format(time.DateTime),
 	}
 	err := s.repo.Update(id, cust)
+	if err != nil {
+		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update review")
+	}
+	return nil
+}
+func (s reviewSvc) UpdateStatusRev(id int, req domain.StatusRev) error {
+	cust := port.Review{
+		Status: req.Status,
+	}
+	err := s.repo.UpdateStatusReview(id, cust.Status)
 	if err != nil {
 		return errs.New(http.StatusInternalServerError, "80001", errs.SystemErr, "Cannot update review")
 	}

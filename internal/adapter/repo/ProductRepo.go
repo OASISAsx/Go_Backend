@@ -67,22 +67,9 @@ func (c productRepo) Search(productName string) ([]port.Product, error) {
 	return product, nil
 }
 
-func (c productRepo) UpdateStatusProduct(id int, status bool) error {
-	err := c.db.Model(&port.Product{}).Where("product_id = ?", id).Update("status", status).Error
-	if err != nil {
-		return err
-	}
-	return nil
-}
+
 func (c productRepo) UpdateSellStatus(id int, status bool) error {
 	err := c.db.Model(&port.Product{}).Where("product_id = ?", id).Update("sell_status", status).Error
-	if err != nil {
-		return err
-	}
-	return nil
-}
-func (c productRepo) UpdateCount(id int, product port.Product) error {
-	err := c.db.Model(&port.Product{}).Where("product_id = ?", id).Update("count", gorm.Expr("count + ?", product.Count)).Error
 	if err != nil {
 		return err
 	}

@@ -5,11 +5,9 @@ type ProductRepo interface {
 	GetById(int) (*Product, error)
 	Create(Product) (*Product, error)
 	Update(int, Product) error
+	UpdateSellStatus(int, bool) error
 	Delete(int) error
 	Search(string) ([]Product, error)
-	UpdateStatusProduct(int, bool) error
-	UpdateCount(int, Product) error
-	UpdateSellStatus(int, bool) error
 }
 
 type Product struct {
@@ -18,15 +16,14 @@ type Product struct {
 	ProductName   string
 	ProductDesc   string `gorm:"notnull;type:varchar(500)"`
 	ProductType   string
-	ProductPrice  int `gorm:"type:int(20)"`
-	ProductStock  string
+	ProductPrice  int    `gorm:"type:int(20)"`
+	ProductStock  string `gorm:"notnull;default=1;type:varchar(1)"`
 	ProductImages string
 	ProductImagex string
 	ProductImagey string
 	ProductImagez string
-	Status        bool `gorm:"column:status;notnull"`
-	SellStatus    bool `gorm:"notnull"`
-	Count         int  `gorm:"type:int(10)"`
+	Status        string `gorm:"notnull;default=กำลังดำเนินการ;type:varchar(20)"`
+	SellStatus    bool   `gorm:"notnull"`
 	CreatedBy     string
 	CreatedDate   string
 	UpdatedBy     string `gorm:"null"`

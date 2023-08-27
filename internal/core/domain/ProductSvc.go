@@ -5,11 +5,9 @@ type ProductSvc interface {
 	GetById(int) (*ProductRespone, error)
 	AddProduct(ProductRequest) (*ProductRespone, error)
 	UpdateProduct(int, ProductRequest) error
+	UpdateSellStatus(int, SellStatusProduct) error
 	DeleteProduct(int) error
 	Search(string) (*[]ProductRespone, error)
-	UpdateStatusProduct(int, StatusProduct) error
-	UpdateSellStatus(int, SellStatusProduct) error
-	UpdateCount(int, ProductRequest) error
 }
 
 type ProductRequest struct {
@@ -23,9 +21,8 @@ type ProductRequest struct {
 	ProductImagey string `json:"productimagey"`
 	ProductImagez string `json:"productimagez"`
 	ProductType   string `json:"producttype"`
-	Status        bool   `json:"status"`
+	Status        string `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`
-	Count         int    `json:"count"`
 	CreatedBy     string `json:"createdby"`
 	CreatedDate   string `json:"createddate"`
 	UpdatedBy     string `json:"updatedby"`
@@ -44,17 +41,13 @@ type ProductRespone struct {
 	ProductImagey string `json:"productimagey"`
 	ProductImagez string `json:"productimagez"`
 	ProductType   string `json:"producttype"`
-	Status        bool   `json:"status"`
+	Status        string `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`
-	Count         int    `json:"count"`
 	CreatedBy     string `json:"createdby"`
 	CreatedDate   string `json:"createddate"`
 	UpdatedBy     string `json:"updatedby"`
 	UpdatedDate   string `json:"updateddate"`
 	ProductQr     string `json:"productqr"`
-}
-type StatusProduct struct {
-	Status bool `json:"status"`
 }
 type SellStatusProduct struct {
 	SellStatus bool `json:"sellstatus"`

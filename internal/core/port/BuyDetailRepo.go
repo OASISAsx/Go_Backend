@@ -22,6 +22,7 @@ type BuyDetail struct {
 	PayStatus     string `gorm:"notnull;default=กำลังดำเนินการ;type:varchar(20)"`
 	ProductName   string `gorm:"notnull;type:varchar(50)"`
 	ProductImages string
+	ProductStock  string
 	ProductPrice  int `gorm:"notnull;type:int(10)"`
 	ProductType   string
 	ProductDesc   string `gorm:"notnull;type:varchar(100)"`

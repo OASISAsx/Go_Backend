@@ -9,26 +9,21 @@ type UserDetailSvc interface {
 }
 
 type UserDetailRequest struct {
-	CardId          string `json:"cardid"`
-	UserId          uint   `json:"userid"`
-	SvcId           string `json:"svcid"`
-	FristNameUser   string `json:"fristnameuser"`
-	LastNameUser    string `json:"lastnameuser"`
-	FristNameSeller string `json:"fristnameseller"`
-	LastNameSeller  string `json:"lastnameseller"`
-	UserAddress     string `json:"useraddress"`
-	UserZibId       string `json:"userzibId"`
-	TCode           string `json:"tcode"`
-	ACode           string `json:"acode"`
-	ProvinceId      string `json:"provinceid"`
-	UserPhone       string `json:"userphone"`
-	UserEmail       string `json:"useremail"`
-	UserImege       string `json:"userimege"`
-	RecordStatus    string `json:"recordstatus"`
-	CreatedBy       string `json:"createdBy"`
-	CreatedDate     string `json:"createdDate"`
-	UpdatedBy       string `json:"updatedBy"`
-	UpdatedDate     string `json:"updatedDate"`
+	CardId        string `json:"cardid"`
+	UserId        uint   `json:"userid"`
+	SvcId         string `json:"svcid"`
+	FristNameUser string `json:"fristnameuser"`
+	LastNameUser  string `json:"lastnameuser"`
+	UserAddress   string `json:"useraddress"`
+	UserZibId     string `json:"userzibId"`
+	UserPhone     string `json:"userphone"`
+	RecordStatus  string `json:"recordstatus"`
+	Avatar        string `json:"Avatar"`
+	Province      string `json:"province"`
+	CreatedBy     string `json:"createdBy"`
+	CreatedDate   string `json:"createdDate"`
+	UpdatedBy     string `json:"updatedBy"`
+	UpdatedDate   string `json:"updatedDate"`
 }
 
 type UserDetailRespone struct {
@@ -40,12 +35,9 @@ type UserDetailRespone struct {
 	LastNameUser  string `json:"lastnameuser"`
 	UserAddress   string `json:"useraddress"`
 	UserZibId     string `json:"userzibId"`
-	ProvinceId    string `json:"provinceid"`
 	UserPhone     string `json:"userphone"`
-	UserEmail     string `json:"useremail"`
-	BankName      string `gorm:"notnull;type:varchar(100)"`
-	BankId        string `gorm:"notnull;type:varchar(10)"`
-	PersonCard    string `gorm:"null;type:longtext"`
+	Avatar        string `json:"Avatar"`
+	Province      string `json:"province"`
 	RecordStatus  string `json:"recordstatus"`
 	CreatedBy     string `json:"createdBy"`
 	CreatedDate   string `json:"createdDate"`
