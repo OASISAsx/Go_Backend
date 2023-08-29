@@ -11,9 +11,9 @@ type ProductRepo interface {
 }
 
 type Product struct {
-	ProductId     uint `gorm:"primaryKey;autoIncrement;type:int(10)"`
-	SvcId         uint
-	ProductName   string
+	ProductId     uint   `gorm:"primaryKey;autoIncrement;type:int(10)"`
+	SvcId         uint   `gorm:"primaryKey;autoIncrement;type:int(10)"`
+	ProductName   string `gorm:"notnull;type:varchar(20)"`
 	ProductDesc   string `gorm:"notnull;type:varchar(500)"`
 	ProductType   string
 	ProductPrice  int    `gorm:"type:int(20)"`
@@ -22,6 +22,7 @@ type Product struct {
 	ProductImagex string
 	ProductImagey string
 	ProductImagez string
+	RvRank        string `gorm:"notnull;type:varchar(5)"`
 	Status        string `gorm:"notnull;default=กำลังดำเนินการ;type:varchar(20)"`
 	SellStatus    bool   `gorm:"notnull"`
 	CreatedBy     string

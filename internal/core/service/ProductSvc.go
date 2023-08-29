@@ -4,6 +4,7 @@ import (
 	"collection/errs"
 	"collection/internal/core/domain"
 	"collection/internal/core/port"
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -37,12 +38,14 @@ func (s productSvc) GetAllProduct() ([]domain.ProductRespone, error) {
 			ProductImagey: c.ProductImagey,
 			ProductImagez: c.ProductImagez,
 			ProductType:   c.ProductType,
+			RvRank:        c.RvRank,
 			Status:        c.Status,
 			SellStatus:    c.SellStatus,
-			CreatedBy:   c.CreatedBy,
-			CreatedDate: c.CreatedDate,
-			UpdatedBy:   c.UpdatedBy,
-			UpdatedDate: c.UpdatedDate,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
+			ProductQr:     fmt.Sprintf("https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"),
 		})
 
 	}
@@ -66,11 +69,13 @@ func (s productSvc) GetById(id int) (*domain.ProductRespone, error) {
 		ProductImagey: cust.ProductImagey,
 		ProductImagez: cust.ProductImagez,
 		ProductType:   cust.ProductType,
+		RvRank:        cust.RvRank,
 		Status:        cust.Status,
 		CreatedBy:     cust.CreatedBy,
 		CreatedDate:   cust.CreatedDate,
 		UpdatedBy:     cust.UpdatedBy,
 		UpdatedDate:   cust.UpdatedDate,
+		ProductQr:     fmt.Sprintf("https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"),
 	}
 	return &resp, nil
 }
@@ -86,11 +91,12 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductImagex: req.ProductImagex,
 		ProductImagey: req.ProductImagey,
 		ProductImagez: req.ProductImagez,
+		RvRank:        "0",
 		Status:        "กำลังดำเนินการ",
 		SellStatus:    false,
-		ProductType: req.ProductType,
-		CreatedBy:   req.CreatedBy,
-		CreatedDate: newtime.Format(time.DateTime),
+		ProductType:   req.ProductType,
+		CreatedBy:     req.CreatedBy,
+		CreatedDate:   newtime.Format(time.DateTime),
 	}
 	newCust, err := s.repo.Create(cust)
 	if err != nil {
@@ -106,10 +112,12 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 		ProductImagex: newCust.ProductImagex,
 		ProductImagey: newCust.ProductImagey,
 		ProductImagez: newCust.ProductImagez,
+		RvRank:        newCust.RvRank,
 		Status:        newCust.Status,
 		ProductType:   newCust.ProductType,
 		CreatedBy:     newCust.CreatedBy,
 		CreatedDate:   newtime.Format(time.DateTime),
+		ProductQr:     fmt.Sprintf("https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"),
 	}
 
 	return &resp, nil
@@ -127,6 +135,7 @@ func (s productSvc) UpdateProduct(id int, req domain.ProductRequest) error {
 		ProductImagey: req.ProductImagey,
 		ProductImagez: req.ProductImagez,
 		ProductType:   req.ProductType,
+		RvRank:        req.RvRank,
 		Status:        req.Status,
 		UpdatedBy:     "Admin",
 		UpdatedDate:   newtime.Format(time.DateTime),
@@ -161,12 +170,13 @@ func (s productSvc) Search(productName string) (*[]domain.ProductRespone, error)
 			ProductImagez: c.ProductImagez,
 			ProductPrice:  c.ProductPrice,
 			ProductDesc:   c.ProductDesc,
+			RvRank:        c.RvRank,
 			Status:        c.Status,
 			SellStatus:    c.SellStatus,
-			CreatedBy:   c.CreatedBy,
-			CreatedDate: c.CreatedDate,
-			UpdatedBy:   c.UpdatedBy,
-			UpdatedDate: c.UpdatedDate,
+			CreatedBy:     c.CreatedBy,
+			CreatedDate:   c.CreatedDate,
+			UpdatedBy:     c.UpdatedBy,
+			UpdatedDate:   c.UpdatedDate,
 		})
 
 	}

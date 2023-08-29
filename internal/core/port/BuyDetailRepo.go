@@ -17,12 +17,12 @@ type BuyDetail struct {
 	ProductId     uint   `gorm:"notnull;type:int(10)"`
 	ById          uint   `gorm:"notnull;type:int(10)"`
 	PaySlip       string `gorm:"notnull"`
-	ParNum        string
-	TransPort     string 
+	ParNum        string`gorm:"notnull;type:varchar(50)"`
+	TransPort     string `gorm:"notnull;type:varchar(50)"`
 	PayStatus     string `gorm:"notnull;default=กำลังดำเนินการ;type:varchar(20)"`
 	ProductName   string `gorm:"notnull;type:varchar(50)"`
 	ProductImages string
-	ProductStock  string
+	ProductStock  string `gorm:"notnull;type:int(9)"`
 	ProductPrice  int `gorm:"notnull;type:int(10)"`
 	ProductType   string
 	ProductDesc   string `gorm:"notnull;type:varchar(100)"`

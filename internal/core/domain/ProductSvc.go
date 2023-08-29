@@ -21,6 +21,7 @@ type ProductRequest struct {
 	ProductImagey string `json:"productimagey"`
 	ProductImagez string `json:"productimagez"`
 	ProductType   string `json:"producttype"`
+	RvRank        string `json:"rvrank"`
 	Status        string `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`
 	CreatedBy     string `json:"createdby"`
@@ -41,6 +42,7 @@ type ProductRespone struct {
 	ProductImagey string `json:"productimagey"`
 	ProductImagez string `json:"productimagez"`
 	ProductType   string `json:"producttype"`
+	RvRank        string `json:"rvrank"`
 	Status        string `json:"status"`
 	SellStatus    bool   `json:"sellstatus"`
 	CreatedBy     string `json:"createdby"`

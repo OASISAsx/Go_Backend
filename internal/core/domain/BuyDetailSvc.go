@@ -19,10 +19,11 @@ type BuyDetailRequest struct {
 	ParNum        string `json:"parnum"`
 	TransPort     string `json:"transport"`
 	PayStatus     string `json:"paymentstatus"`
+	QrCode        string `json:"qrcode"`
 	ProductName   string `json:"productname"`
 	ProductImages string `json:"productimages"`
 	ProductPrice  int    `json:"productprice"`
-	ProductStock  string    `json:"productstock"`
+	ProductStock  string `json:"productstock"`
 	ProductType   string `json:"producttype"`
 	ProductDesc   string `json:"productdesc"`
 	CreatedBy     string `json:"createdby"`
@@ -39,11 +40,12 @@ type BuyDetailRespone struct {
 	PaySlip       string `json:"payslip"`
 	ParNum        string `json:"parnum"`
 	TransPort     string `json:"transport"`
+	QrCode        string `json:"qrcode"`
 	PayStatus     string `json:"paymentstatus"`
 	ProductName   string `json:"productname"`
 	ProductImages string `json:"productimages"`
 	ProductPrice  int    `json:"productprice"`
-	ProductStock  string    `json:"productstock"`
+	ProductStock  string `json:"productstock"`
 	ProductType   string `json:"producttype"`
 	ProductDesc   string `json:"productdesc"`
 	CreatedBy     string `json:"createdby"`
