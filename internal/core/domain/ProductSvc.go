@@ -12,6 +12,7 @@ type ProductSvc interface {
 
 type ProductRequest struct {
 	SvcId         uint   `json:"svcid"`
+	UserSeller    string `json:"userseller"`
 	ProductName   string `json:"productname"`
 	ProductDesc   string `json:"productdesc"`
 	ProductPrice  int    `json:"productprice"`
@@ -33,6 +34,7 @@ type ProductRequest struct {
 type ProductRespone struct {
 	ProductId     uint   `json:"productid"`
 	SvcId         uint   `json:"svcid"`
+	UserSeller    string `json:"userseller"`
 	ProductName   string `json:"productname"`
 	ProductDesc   string `json:"productdesc"`
 	ProductPrice  int    `json:"productprice"`

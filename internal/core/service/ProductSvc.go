@@ -29,6 +29,7 @@ func (s productSvc) GetAllProduct() ([]domain.ProductRespone, error) {
 		resp = append(resp, domain.ProductRespone{
 			ProductId:     c.ProductId,
 			SvcId:         c.SvcId,
+			UserSeller:    c.UserSeller,
 			ProductName:   c.ProductName,
 			ProductDesc:   c.ProductDesc,
 			ProductPrice:  c.ProductPrice,
@@ -60,6 +61,7 @@ func (s productSvc) GetById(id int) (*domain.ProductRespone, error) {
 	resp := domain.ProductRespone{
 		ProductId:     cust.ProductId,
 		SvcId:         cust.SvcId,
+		UserSeller:    cust.UserSeller,
 		ProductName:   cust.ProductName,
 		ProductPrice:  cust.ProductPrice,
 		ProductStock:  cust.ProductStock,
@@ -83,6 +85,7 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 	newtime := time.Now()
 	cust := port.Product{
 		SvcId:         req.SvcId,
+		UserSeller:    req.UserSeller,
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
 		ProductPrice:  req.ProductPrice,
@@ -104,6 +107,7 @@ func (s productSvc) AddProduct(req domain.ProductRequest) (*domain.ProductRespon
 	}
 	resp := domain.ProductRespone{
 		SvcId:         newCust.SvcId,
+		UserSeller:    newCust.UserSeller,
 		ProductName:   newCust.ProductName,
 		ProductDesc:   newCust.ProductDesc,
 		ProductPrice:  newCust.ProductPrice,
@@ -126,6 +130,7 @@ func (s productSvc) UpdateProduct(id int, req domain.ProductRequest) error {
 	newtime := time.Now()
 	cust := port.Product{
 		SvcId:         req.SvcId,
+		UserSeller:    req.UserSeller,
 		ProductName:   req.ProductName,
 		ProductDesc:   req.ProductDesc,
 		ProductPrice:  req.ProductPrice,
@@ -162,6 +167,7 @@ func (s productSvc) Search(productName string) (*[]domain.ProductRespone, error)
 	for _, c := range custs {
 		resp = append(resp, domain.ProductRespone{
 			ProductId:     c.ProductId,
+			UserSeller:    c.UserSeller,
 			ProductName:   c.ProductName,
 			ProductType:   c.ProductType,
 			ProductImages: c.ProductImages,
