@@ -12,7 +12,7 @@ type ProductRepo interface {
 
 type Product struct {
 	ProductId     uint   `gorm:"primaryKey;autoIncrement;type:int(10)"`
-	SvcId         uint   `gorm:"primaryKey;autoIncrement;type:int(10)"`
+	SvcId         uint   `gorm:"type:int(10)"`
 	UserSeller    string `gorm:"notnull;type:varchar(30)"`
 	ProductName   string `gorm:"notnull;type:varchar(20)"`
 	ProductDesc   string `gorm:"notnull;type:varchar(500)"`
@@ -33,5 +33,5 @@ type Product struct {
 }
 
 func (c Product) TableName() string {
-	return "tbl_product"
+	return "tbl_Product"
 }

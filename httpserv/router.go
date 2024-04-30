@@ -25,21 +25,7 @@ func bindCustomer(g gin.Engine) {
 	}
 
 }
-func bindRole(g gin.Engine) {
-	repo := repo.NewRoleRepo(infrastructure.DB)
-	svc := service.NewRoleSvc(repo)
-	hdl := handler.NewRoleHdl(svc)
 
-	v1 := g.Group("/v1")
-	{
-		v1.GET("/roles", hdl.GetRoles)
-		v1.GET("/role/:roleID", hdl.GetRole)
-		v1.POST("/role", hdl.AddRole)
-		v1.PUT("/role/:roleID", hdl.UpdateRole)
-		v1.DELETE("/role/:roleID", hdl.DeleteRole)
-	}
-
-}
 func bindReview(g gin.Engine) {
 	repo := repo.NewReviewRepo(infrastructure.DB)
 	svc := service.NewReviewSvc(repo)
@@ -73,21 +59,7 @@ func bindProduct(g gin.Engine) {
 	}
 
 }
-func bindBuycs(g gin.Engine) {
-	repo := repo.NewBuycsRepo(infrastructure.DB)
-	svc := service.NewBuycsSvc(repo)
-	hdl := handler.NewBuycsHdl(svc)
 
-	v1 := g.Group("/v1")
-	{
-		v1.GET("/buycss", hdl.GetBuycss)
-		v1.GET("/buycs/:buycsID", hdl.GetBuycs)
-		v1.POST("/buycs", hdl.AddBuycs)
-		v1.PUT("/buycs/:buycsID", hdl.UpdateBuycs)
-		v1.DELETE("/buycs/:buycsID", hdl.DeleteBuycs)
-	}
-
-}
 func bindBuyDetail(g gin.Engine) {
 	repo := repo.NewBuyDetailRepo(infrastructure.DB)
 	svc := service.NewBuyDetailSvc(repo)
@@ -103,21 +75,6 @@ func bindBuyDetail(g gin.Engine) {
 		v1.POST("/buydetail", hdl.AddBuyDetail)
 		v1.PUT("/buydetail/:buydetailID", hdl.UpdateBuyDetail)
 		v1.DELETE("/buydetail/:buydetailID", hdl.DeleteBuyDetail)
-	}
-
-}
-func bindAreapv(g gin.Engine) {
-	repo := repo.NewAreapvRepo(infrastructure.DB)
-	svc := service.NewAreapvSvc(repo)
-	hdl := handler.NewAreapvHdl(svc)
-
-	v1 := g.Group("/v1")
-	{
-		v1.GET("/areapvs", hdl.GetAreapvs)
-		v1.GET("/areapv/:areapvID", hdl.GetAreapv)
-		v1.POST("/areapv", hdl.AddAreapv)
-		v1.PUT("/areapv/:areapvID", hdl.UpdateAreapv)
-		v1.DELETE("/areapv/:areapvID", hdl.DeleteAreapv)
 	}
 
 }
@@ -152,34 +109,7 @@ func bindSellerDetail(g gin.Engine) {
 	}
 
 }
-func bindAreaap(g gin.Engine) {
-	repo := repo.NewAreaapRepo(infrastructure.DB)
-	svc := service.NewAreaapSvc(repo)
-	hdl := handler.NewAreaapHdl(svc)
 
-	v1 := g.Group("/v1")
-	{
-		v1.GET("/areaaps", hdl.GetAreaaps)
-		v1.GET("/areaap/:areaapID", hdl.GetAreaap)
-		v1.POST("/areaap", hdl.AddAreaap)
-		v1.PUT("/areaap/:areaapID", hdl.UpdateAreaap)
-		v1.DELETE("/areaap/:areaapID", hdl.DeleteAreaap)
-	}
-}
-func bindAreadt(g gin.Engine) {
-	repo := repo.NewAreadtRepo(infrastructure.DB)
-	svc := service.NewAreadtSvc(repo)
-	hdl := handler.NewAreadtHdl(svc)
-
-	v1 := g.Group("/v1")
-	{
-		v1.GET("/areadts", hdl.GetAreadts)
-		v1.GET("/areadt/:areadtID", hdl.GetAreadt)
-		v1.POST("/areadt", hdl.AddAreadt)
-		v1.PUT("/areadt/:areadtID", hdl.UpdateAreadt)
-		v1.DELETE("/areadt/:areadtID", hdl.DeleteAreadt)
-	}
-}
 func bindRegister(g gin.Engine) {
 	repo := repo.NewRegisterRepo(infrastructure.DB)
 	svc := service.NewRegisterSvc(repo)
@@ -242,4 +172,19 @@ func bindEmail(g gin.Engine) {
 	{
 		v1.POST("/sender", hdl.SendMail())
 	}
+}
+func bindReprot(g gin.Engine) {
+	repo := repo.NewReportRepo(infrastructure.DB)
+	svc := service.NewReportSvc(repo)
+	hdl := handler.NewReportHdl(svc)
+
+	v1 := g.Group("/v1")
+	{
+		v1.GET("/reports", hdl.GetReports)
+		v1.GET("/report/:reportID", hdl.GetReport)
+		v1.POST("/report", hdl.AddReport)
+		v1.PUT("/report/:reportID", hdl.UpdateReport)
+		v1.DELETE("/report/:reportID", hdl.DeleteReport)
+	}
+
 }

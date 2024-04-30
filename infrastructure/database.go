@@ -35,10 +35,15 @@ func InitDB() {
 	}
 
 	DB = db
-	db.AutoMigrate(&port.Role{}, &port.Review{}, &port.Product{}, &port.Buycs{}, &port.BuyDetail{}, &port.Areapv{},
-		&port.UserDetail{}, &port.Areaap{}, &port.Areadt{}, &port.Register{}, &port.SellerDetail{}  ) 
-
+	db.AutoMigrate(&port.Product{})
+	db.AutoMigrate(&port.Review{})
+	db.AutoMigrate(&port.BuyDetail{})
+	db.AutoMigrate(&port.UserDetail{})
+	db.AutoMigrate(&port.Register{})
+	db.AutoMigrate(&port.SellerDetail{})
+	db.AutoMigrate(&port.Report{})
 }
+
 
 type SqlLogger struct {
 	logger.Interface
